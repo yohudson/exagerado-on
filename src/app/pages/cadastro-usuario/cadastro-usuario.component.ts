@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroUsuarioComponent implements OnInit {
 
+  cadastroCompleto: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {

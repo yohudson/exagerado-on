@@ -1,4 +1,4 @@
-<div class="login-form">
+<div class="form">
     <form>
         <div class="row">
             <label class="control-label">Login</label>
@@ -13,9 +13,9 @@
             <button class="btn btn-primary">Entrar FB</button>
             <button class="btn btn-danger">Entrar Google</button>
         </div>
-        <div class="row">
-            <p>Ainda não tem cadastro? <a>É fácil e rápido, vem!</a></p>
-            <p>Esqueceu a senha? <a>Recupere-a aqui!</a></p>
+        <div class="row links">
+            <p>Ainda não tem cadastro? <a [routerLink]="'/cadastro'">É fácil e rápido, vem!</a></p>
+            <p>Esqueceu a senha? <a [routerLink]="'/recuperar-senha'">Recupere-a aqui!</a></p>
         </div>
     </form>
 </div>

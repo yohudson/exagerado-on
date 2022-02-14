@@ -8,13 +8,19 @@ import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usua
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
+import { QuestionarioComponent } from './components/questionario/questionario.component';
+import { MarcasComponent } from './components/marcas/marcas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CadastroUsuarioComponent,
-    NavBarComponent
+    NavBarComponent,
+    RecuperarSenhaComponent,
+    QuestionarioComponent,
+    MarcasComponent
   ],
   imports: [
     BrowserModule,

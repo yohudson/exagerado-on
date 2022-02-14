@@ -1,1 +1,38 @@
-<p>cadastro-usuario works!</p>
+<div class="form">
+    <form>
+        <div class="row">
+            <label class="control-label">Nome</label>
+            <input type="text" class="form-control" required>
+        </div>
+        <div class="row">
+            <label class="control-label">Data de nascimento</label>
+            <input type="date" class="form-control">
+        </div>
+        <div class="row">
+            <label class="control-label">Gênero</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="row">
+            <label class="control-label">Telefone</label>
+            <input type="tel" class="form-control" required>
+        </div>
+        <div class="row">
+            <label class="control-label">E-mail</label>
+            <input type="email" class="form-control" required>
+        </div>
+        <div class="row">
+            <label class="control-label">Senha</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="row">
+            <label class="control-label">Confirmar senha</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="row button-row">
+            <button class="btn btn-secondary" [routerLink]="'/login'">Voltar</button>
+            <button class="btn btn-success">Salvar</button>
+        </div>
+    </form>
+</div>
+<app-questionario *ngIf="cadastroCompleto"></app-questionario>
+<app-marcas></app-marcas>
