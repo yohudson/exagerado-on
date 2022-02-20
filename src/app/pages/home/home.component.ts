@@ -10,22 +10,19 @@ import { Router } from "@angular/router";
 export class HomeComponent implements OnInit {
 
   constructor(
-    public router: Router,
+    private router: Router,
     public global: Global
   ) { }
 
   ngOnInit(): void {
-    if(!localStorage.getItem('login')){
+    var log = localStorage.getItem('login');
+    if(!log){
       this.router.navigate(['/login']);
       this.global.nav = false;
     }
     else{
       this.global.nav = true;
     }
-
-    var login = localStorage.getItem('login');
-    console.log(login)
-    console.log(this.global.nav)
   }
 
 }

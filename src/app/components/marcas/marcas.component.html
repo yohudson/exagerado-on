@@ -1,4 +1,11 @@
-<div class="form-check form-check-inline" *ngFor="let m of listaMarcas">
-    <input class="form-check-input" type="checkbox" id="{{m.id}}" value="{{m.id}}">
-    <label class="form-check-label">{{m.nome}}</label>
+<label for="dataList" class="control-label">Informe suas marcas favoritas</label>
+<input class="form-control" list="datalistOptions" id="dataList" placeholder="Type to search..." (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada">
+<datalist id="datalistOptions">
+  <option *ngFor="let m of listaMarcas" [value]="m.nome">
+</datalist>
+
+<div class="lista-marcas">
+    <span class="badge rounded-pill bg-grey text-dark" *ngFor="let f of marcasFavoritas">{{f}}
+        <span class="material-icons" (click)="removerFavorita(f)">close</span>
+    </span>
 </div>

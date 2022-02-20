@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-marcas',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class MarcasComponent implements OnInit {
 
   listaMarcas: any = [];
+  marcasFavoritas: any = []
+  marcaSelecionada: any = '';
 
   constructor() { }
 
@@ -28,6 +31,18 @@ export class MarcasComponent implements OnInit {
       {nome: 'Tommy Hilfiger', segmento: 'esportes', id: 13},
       {nome: 'Victor Hugo', segmento: 'esportes', id: 14},
     ];
+  }
+
+  addFavoritas = (f:any) =>{
+    console.log(f.target.value)
+    this.marcasFavoritas.push(f.target.value)
+    console.log(this.marcasFavoritas)
+    this.marcaSelecionada = ''
+  }
+
+  removerFavorita = (m: any)=>{
+    var x = this.marcasFavoritas.indexOf(m);
+    this.marcasFavoritas.splice(x, 1); 
   }
 
 }

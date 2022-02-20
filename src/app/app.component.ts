@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Global } from './global';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,21 @@ export class AppComponent {
   title = 'exagerado-on';
 
   constructor(
-    public global: Global
+    public global: Global,
+    private router: Router,
+
   ) { }
 
   ngOnInit() {
-    if (!localStorage.getItem('login')){
+    var log = localStorage.getItem('login')
+    if (!log){
       console.log('none')
       this.global.nav = false;
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.global.nav = true;
+      this.router.navigate(['/']);
     }
   }
 }
