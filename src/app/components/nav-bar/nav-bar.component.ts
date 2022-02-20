@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Global } from '../../global';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private global: Global
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  logout = () =>{
+    localStorage.removeItem('login');
+    this.global.nav = false;
+    this.router.navigate(['/login']);
   }
 
 }

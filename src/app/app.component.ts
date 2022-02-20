@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Global } from './global';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'exagerado-on';
+
+  constructor(
+    public global: Global
+  ) { }
+
+  ngOnInit() {
+    if (!localStorage.getItem('login')){
+      console.log('none')
+      this.global.nav = false;
+    }
+  }
 }

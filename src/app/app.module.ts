@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { Global } from './global'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -11,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RecuperarSenhaComponent } from './pages/recuperar-senha/recuperar-senha.component';
 import { QuestionarioComponent } from './components/questionario/questionario.component';
 import { MarcasComponent } from './components/marcas/marcas.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { MarcasComponent } from './components/marcas/marcas.component';
     NavBarComponent,
     RecuperarSenhaComponent,
     QuestionarioComponent,
-    MarcasComponent
+    MarcasComponent,
+    HomeComponent,
+    NavMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,9 @@ import { MarcasComponent } from './components/marcas/marcas.component';
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    Global
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
