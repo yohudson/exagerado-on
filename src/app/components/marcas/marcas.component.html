@@ -1,11 +1,26 @@
-<label for="dataList" class="control-label">Informe suas marcas favoritas</label>
-<input class="form-control" list="datalistOptions" id="dataList" placeholder="Type to search..." (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada">
-<datalist id="datalistOptions">
-  <option *ngFor="let m of listaMarcas" [value]="m.nome">
-</datalist>
+<div class="form">
+    <form>
+        <div class="row">
 
-<div class="lista-marcas">
-    <span class="badge rounded-pill bg-grey text-dark" *ngFor="let f of marcasFavoritas">{{f}}
-        <span class="material-icons" (click)="removerFavorita(f)">close</span>
-    </span>
+            <label for="dataList" class="control-label">E, pra finalizar agora, conta pra gente quais as marcas que
+                aceleram seu coração por aqui.</label>
+            <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o nome para filtrar..." (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada">
+            <datalist id="datalistOptions">
+                <option *ngFor="let m of listaMarcas" [value]="m.nome">
+            </datalist>
+        </div>
+
+        <div class="row">
+            <div class="lista-marcas">
+                <span class="badge rounded-pill bg-grey text-dark" *ngFor="let f of marcasFavoritas">{{f}}
+                    <span class="material-icons" (click)="removerFavorita(f)">close</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="row button-row">
+            <button class="btn btn-secondary" (click)="proximoPasso(2)">Voltar</button>
+            <button class="btn btn-success">Salvar</button>
+        </div>
+    </form>
 </div>

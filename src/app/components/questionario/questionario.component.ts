@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-questionario',
@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionarioComponent implements OnInit {
 
-
+  @Output() passo = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  
+  proximoPasso = (value: number) => {
+    this.passo.emit(value)
   }
 
 

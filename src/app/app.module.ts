@@ -22,6 +22,7 @@ import { ListaLojasComponent } from './pages/lista-lojas/lista-lojas.component';
 import { MapaComponent } from './pages/mapa/mapa.component';
 import { PassaporteCovidComponent } from './pages/passaporte-covid/passaporte-covid.component';
 import { FormsModule } from '@angular/forms';
+import { DadosUsuarioComponent } from './components/dados-usuario/dados-usuario.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     ListaMarcasComponent,
     ListaLojasComponent,
     MapaComponent,
-    PassaporteCovidComponent
+    PassaporteCovidComponent,
+    DadosUsuarioComponent
   ],
   imports: [
     BrowserModule,

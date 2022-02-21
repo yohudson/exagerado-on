@@ -28,3 +28,9 @@ div.logo {
     align-items: center;
     justify-content: center;
 }
+
+@media screen and (max-width: 767px) {
+    div.login-group {
+        width: 90%;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ export class MarcasComponent implements OnInit {
   marcasFavoritas: any = []
   marcaSelecionada: any = '';
 
+  @Output() passo = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {
@@ -43,6 +44,11 @@ export class MarcasComponent implements OnInit {
   removerFavorita = (m: any)=>{
     var x = this.marcasFavoritas.indexOf(m);
     this.marcasFavoritas.splice(x, 1); 
+  }
+
+  
+  proximoPasso = (value: number) => {
+    this.passo.emit(value)
   }
 
 }

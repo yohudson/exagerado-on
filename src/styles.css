@@ -19,6 +19,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
 }
 
 .control-label {
@@ -27,10 +28,24 @@ body {
 
 .row {
     margin: 16px;
+    max-width: 50vw;
 }
 
 .button-row {
     display: flex;
     flex-wrap: nowrap;
-    width: fit-content
+    width: fit-content;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .row {
+        max-width: 100%;
+    }
 }
