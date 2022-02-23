@@ -1,0 +1,7 @@
+.row {
+    max-width: 100%;
+}
+
+.row>.col-md-6 {
+    margin-bottom: 10px;
+}
