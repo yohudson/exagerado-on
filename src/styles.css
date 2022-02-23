@@ -15,20 +15,23 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.form {
+
+/* .form {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100vw;
-}
+} */
 
 .control-label {
     font-weight: bold;
+    padding: 0;
 }
 
 .row {
-    margin: 16px;
+    margin: 16px auto;
     max-width: 50vw;
+    width: 100%;
 }
 
 .button-row {

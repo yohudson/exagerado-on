@@ -35,3 +35,10 @@ div.logo {
         width: 90%;
     }
 }
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}

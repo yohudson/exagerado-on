@@ -38,7 +38,7 @@ export class MarcasComponent implements OnInit {
     console.log(f.target.value)
     this.marcasFavoritas.push(f.target.value)
     console.log(this.marcasFavoritas)
-    this.marcaSelecionada = ''
+    this.marcaSelecionada = '';
   }
 
   removerFavorita = (m: any)=>{
