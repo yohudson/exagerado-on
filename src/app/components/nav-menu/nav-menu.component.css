@@ -1,0 +1,12 @@
+.offcanvas {
+    visibility: visible;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li a {
+    padding: 15px;
+}

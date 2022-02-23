@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
 
+
   constructor(
     private router: Router,
     public global: Global
@@ -21,6 +22,10 @@ export class NavBarComponent implements OnInit {
     localStorage.removeItem('login');
     this.global.nav = false;
     this.router.navigate(['/login']);
+  }
+
+  openMenu = () => {
+    this.global.displayMenu = true;
   }
 
 }

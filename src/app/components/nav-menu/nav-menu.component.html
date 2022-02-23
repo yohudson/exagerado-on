@@ -1,21 +1,20 @@
-<div class="offcanvas offcanvas-start" tabindex="-1" id="canvas" aria-labelledby="canvas">
+<div class="offcanvas offcanvas-start" tabindex="-1" id="canvas" aria-labelledby="canvas" [ngClass]="{'show' : global.displayMenu}">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div></div>
+        <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="closeMenu()"></button>
     </div>
     <div class="offcanvas-body">
-        <div>
-            Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-        </div>
-        <div class="dropdown mt-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </div>
+        <ul>
+            <li><a class="dropdown-item" [routerLink]="'/'" (click)="navigate()">Home</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/mapa'" (click)="navigate()">Mapa do evento</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/lojas'" (click)="navigate()">Catálogo de lojas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/marcas'" (click)="navigate()">Catálogo de marcas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/passaporte'" (click)="navigate()">Passaporte Covid</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/agenda'" (click)="navigate()">Agenda de atrações</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/login'" (click)="logout()">Sair</a></li>
+        </ul>
     </div>
 </div>
+
+<div class="offcanvas-backdrop fade" [ngClass]="{'show' : global.displayMenu}" [ngStyle]="{'display':global.displayMenu ? 'block' : 'none'}" (click)="closeMenu()"></div>

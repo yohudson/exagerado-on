@@ -13,6 +13,7 @@ div.form {
     background-position: center center;
     background-size: cover;
     overflow: hidden;
+    margin-left: -12px;
 }
 
 div.login-group {
