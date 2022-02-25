@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../service/api.service';
+import { Marca } from '../../models/marca.model';
 
 @Component({
   selector: 'app-lista-marcas',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaMarcasComponent implements OnInit {
 
-  constructor() { }
+  marca = {} as Marca;
+  listaMarcas: any = [];
+
+  constructor(
+    private service: ApiService
+  ) { }
 
   ngOnInit(): void {
+    this.obterMarcas()
+  }
+
+  obterMarcas(): void {
+    this.service.Get(`/Marcas`).subscribe((marcas: Marca[]) => {
+      this.listaMarcas = marcas;
+    })
   }
 
 }

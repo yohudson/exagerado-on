@@ -14,7 +14,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-md-6" *ngFor="let m of listaMarcas">
+    <div class="col-xs-12 col-md-6" *ngFor="let l of listaLojas">
         <div class="card">
             <div class="row m-0 g-0">
                 <div class="col-md-4">
@@ -22,9 +22,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5>{{m.segmento}}</h5>
-                        <h3 class="card-title">{{m.nome}}</h3>
-                        <h4>{{m.corredor}}{{m.loja}}</h4>
+                        <h5>{{l.segmento}}</h5>
+                        <h3 class="card-title">{{l.nome}}</h3>
+                        <h4>{{l.corredor}}{{l.loja}}</h4>
                     </div>
                 </div>
             </div>

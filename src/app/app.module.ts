@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { Global } from './global'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { ApiService } from './service/api.service';
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -21,8 +25,9 @@ import { ListaMarcasComponent } from './pages/lista-marcas/lista-marcas.componen
 import { ListaLojasComponent } from './pages/lista-lojas/lista-lojas.component';
 import { MapaComponent } from './pages/mapa/mapa.component';
 import { PassaporteCovidComponent } from './pages/passaporte-covid/passaporte-covid.component';
-import { FormsModule } from '@angular/forms';
 import { DadosUsuarioComponent } from './components/dados-usuario/dados-usuario.component';
+
+import { AplicarMascarasDirective } from './directives/aplicar-mascaras.directive';
 
 @NgModule({
   declarations: [
@@ -40,17 +45,21 @@ import { DadosUsuarioComponent } from './components/dados-usuario/dados-usuario.
     ListaLojasComponent,
     MapaComponent,
     PassaporteCovidComponent,
-    DadosUsuarioComponent
+    DadosUsuarioComponent,
+    AplicarMascarasDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
-    Global
+    Global,
+    ApiService,
   ],
   bootstrap: [AppComponent]
 })

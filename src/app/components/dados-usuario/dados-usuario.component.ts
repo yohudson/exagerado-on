@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ApiService } from '../../service/api.service';
+import { Global } from '../../global'
 
 @Component({
   selector: 'app-dados-usuario',
@@ -7,15 +9,27 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class DadosUsuarioComponent implements OnInit {
 
+  usuario: any = []
+  listaGeneros: any = [];
 
   @Output() passo = new EventEmitter<number>();
-  constructor() { }
+  constructor(
+    private service: ApiService,
+    public global: Global
+  ) { }
 
   ngOnInit(): void {
+    this.obterGeneros()
   }
 
   proximoPasso = (value: number) => {
     this.passo.emit(value)
+  }
+
+  obterGeneros = () => {
+    this.service.Get(`/Usuario`).subscribe((result) => {
+      console.log(result)
+    })
   }
 
 }
