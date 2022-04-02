@@ -35,12 +35,14 @@ export class MarcasComponent implements OnInit {
   }
 
   addFavoritas = (f:any) =>{
-    console.log(f.target.value)
-    this.marcasFavoritas.push(f.target.value)
+    var marca = f.target.value;
+    var index = this.marcasFavoritas.indexOf(marca)
+      if (index == '-1'){
+        this.marcasFavoritas.push(marca)
+      }
     console.log(this.marcasFavoritas)
-    this.marcaSelecionada = '';
   }
-
+  
   removerFavorita = (m: any)=>{
     var x = this.marcasFavoritas.indexOf(m);
     this.marcasFavoritas.splice(x, 1); 

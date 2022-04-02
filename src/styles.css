@@ -47,6 +47,10 @@ body {
     padding: 0;
 }
 
+.obrigatorio {
+    color: darkred;
+}
+
 @media screen and (max-width: 767px) {
     .row {
         max-width: 100%;

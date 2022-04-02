@@ -3,94 +3,114 @@
         <div class="row">
             <label class="control-label">Conta aqui, qual o melhor período para você fazer suas compras</label>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Manhã
+                <input class="form-check-input" type="checkbox" [(ngModel)]="periodo_compras.manha" id="manha" name="manha"><label for="manha">&nbsp;Manhã</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Tarde
+                <input class="form-check-input" type="checkbox" [(ngModel)]="periodo_compras.tarde" id="tarde" name="tarde">
+                <label for="tarde">&nbsp;Tarde</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Noite
+                <input class="form-check-input" type="checkbox" [(ngModel)]="periodo_compras.noite" id="noite" name="noite"><label for="noite">&nbsp;Noite</label>
             </div>
         </div>
 
         <div class="row">
             <label class="control-label">Já tinha vindo ao EXAGERADO?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Siiiim!
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="radio" [(ngModel)]="conhece_evento" name="conhece_evento" id="sim">Siiiim!
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Não, é a primeira vez!
+                <input class="form-check-input" type="radio" [(ngModel)]="conhece_evento" name="conhece_evento" id="nao">Não, é a primeira vez!
+            </div> -->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="conhece_evento" (change)="indicaConheceEvento()">
+                <label class="form-check-label" for="conhece_evento" *ngIf="conhece_evento">Siiiim, conheço de outros carnavais!</label>
+                <label class="form-check-label" for="conhece_evento" *ngIf="!conhece_evento">Não, é a primeira vez!</label>
             </div>
         </div>
 
         <div class="row">
             <label class="control-label">O EXAGERADO rola de quarta a domingo, em quais dias você participa?</label>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Quarta
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dias_visita.quarta" name="quarta" id="quarta">
+                <label for="quarta">&nbsp;Quarta</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Quinta
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dias_visita.quinta" name="quinta" id="quinta">
+                <label for="quinta">&nbsp;Quinta</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Sexta
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dias_visita.sexta" name="sexta" id="sexta">
+                <label for="sexta">&nbsp;Sexta</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Sábado
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dias_visita.sabado" name="sabado" id="sabado">
+                <label for="sabado">&nbsp;Sábado</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Domingo
+                <input class="form-check-input" type="checkbox" [(ngModel)]="dias_visita.domingo" name="domingo" id="domingo">
+                <label for="domingo">&nbsp;Domingo</label>
             </div>
         </div>
 
         <div class="row">
             <label class="control-label">Migs, como você paga suas compras no EXAGERADO?</label>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Dinheiro
+                <input class="form-check-input" type="checkbox" id="dinheiro" name="dinheiro" [(ngModel)]="forma_pagamento.dinheiro">
+                <label for="dinheiro">&nbsp;Dinheiro</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Cartão de débito
+                <input class="form-check-input" type="checkbox" id="cartao_debito" name="cartao_debito" [(ngModel)]="forma_pagamento.cartao_debito">
+                <label for="cartao_debito">&nbsp;Cartão de débito</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Cartão de crédito
+                <input class="form-check-input" type="checkbox" id="cartao_credito" name="cartao_credito" [(ngModel)]="forma_pagamento.cartao_credito">
+                <label for="cartao_credito">&nbsp;Cartão de crédito</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Pix
+                <input class="form-check-input" type="checkbox" id="pix" name="pix" [(ngModel)]="forma_pagamento.pix">
+                <label for="pix">&nbsp;Pix</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">PicPay
+                <input class="form-check-input" type="checkbox" id="picpay" name="picpay" [(ngModel)]="forma_pagamento.picpay">
+                <label for="picpay">&nbsp;PicPay</label>
             </div>
         </div>
 
         <div class="row">
-            <label class="control-label">E conta pra noix, de que cidade você é?</label>
-            <input type="text" class="form-control">
+            <label class="control-label" for="cidade_origem">E conta pra noix, de que cidade você é?</label>
+            <input type="text" class="form-control" [(ngModel)]="cidade_origem" id="cidade_origem" name="cidade_origem">
         </div>
 
         <div class="row">
-            <label class="control-label">Como ficou sabendo do nosso rolê: EXAGERADO?</label>
-            <input type="text" class="form-control">
+            <label class="control-label" for="soube_evento">Como ficou sabendo do nosso rolê: EXAGERADO?</label>
+            <input type="text" class="form-control" [(ngModel)]="soube_evento" name="soube_evento" id="soube_evento">
         </div>
 
         <div class="row">
             <label class="control-label">E aí, quem é o seu fechamento aqui no EXAGERADO?</label>
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Amigx
+                <input class="form-check-input" type="checkbox" [(ngModel)]="fechamento.amigx" name="fechamento_amigx" id="fechamento_amigx">
+                <label for="fechamento_amigx">&nbsp;Amigx</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Família
+                <input class="form-check-input" type="checkbox" [(ngModel)]="fechamento.familia" name="fechamento_familia" id="fechamento_familia">
+                <label for="fechamento_familia">&nbsp;Família</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">N(amor)adx
+                <input class="form-check-input" type="checkbox" [(ngModel)]="fechamento.amor" name="fechamento_amor" id="fechamento_amor">
+                <label for="fechamento_amor">&nbsp;N(amor)adx</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">Tô sozinhx mexmoo
+                <input class="form-check-input" type="checkbox" [(ngModel)]="fechamento.solo" name="fechamento_solo" id="fechamento_solo">
+                <label for="fechamento_solo">&nbsp;Tô sozinhx mexmoo</label>
             </div>
         </div>
 
         <div class="row">
-            <label class="control-label">Deixa um recadinho pra noix? Pode ser crítica construtiva ou elogio!</label>
-            <textarea class="form-control" rows="5"></textarea>
+            <label class="control-label" name="recado" id="recado">Deixa um recadinho pra noix? Pode ser crítica construtiva ou elogio!</label>
+            <textarea class="form-control" rows="5" (blur)="recado=$event"></textarea>
         </div>
 
         <div class="row button-row">

@@ -1,32 +1,32 @@
 <div class="form">
     <form>
         <div class="row">
-            <label class="control-label">Nome completinho</label>
-            <input type="text" class="form-control" required>
+            <label class="control-label">Nome completinho<b class="obrigatorio">*</b></label>
+            <input type="text" class="form-control" [(ngModel)]="usuario.nome" name="nome" required>
         </div>
         <div class="row">
-            <label class="control-label">Passa seu cel pra noix</label>
-            <input type="tel" class="form-control" id="celular" aplicarMascaras required>
+            <label class="control-label">Passa seu cel pra noix<b class="obrigatorio">*</b></label>
+            <input type="tel" class="form-control" [(ngModel)]="usuario.celular" name="celular" id="celular" aplicarMascaras required>
         </div>
         <div class="row">
-            <label class="control-label">Qual seu e-mail, migs?</label>
-            <input type="email" class="form-control" required>
+            <label class="control-label">Qual seu e-mail, migs?<b class="obrigatorio">*</b></label>
+            <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" required>
         </div>
         <div class="row">
-            <label class="control-label">Agora vamos descobrir: quantos aninhos você tem?</label>
-            <input type="date" class="form-control" id="data_nascimento">
+            <label class="control-label">Agora vamos descobrir: quantos aninhos você tem?<b class="obrigatorio">*</b></label>
+            <input type="date" class="form-control" [(ngModel)]="usuario.data_nascimento" name="data_nascimento" id="data_nascimento">
         </div>
         <div class="row">
             <label class="control-label">E conta pra gente, como você se identifica?</label>
             <input type="text" class="form-control">
         </div>
         <div class="row">
-            <label class="control-label">Agora, precisamos criar uma senha pra você</label>
-            <input type="password" class="form-control">
+            <label class="control-label">Agora, precisamos criar uma senha pra você<b class="obrigatorio">*</b></label>
+            <input type="password" [(ngModel)]="usuario.senha" name="senha" class="form-control" required>
         </div>
         <div class="row">
-            <label class="control-label">E precisamos que você confirme que sabe a senha que escolheu</label>
-            <input type="password" class="form-control">
+            <label class="control-label">E precisamos que você confirme que sabe a senha que escolheu<b class="obrigatorio">*</b></label>
+            <input type="password" [(ngModel)]="usuario.confirma_senha" name="confirmar_senha" class="form-control" required>
         </div>
         <div class="row button-row">
             <button class="btn btn-secondary" [routerLink]="'/login'">Voltar</button>
