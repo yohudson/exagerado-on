@@ -25,33 +25,33 @@ export class ApiService {
     })
   }
 
-  Get(ext:any): Observable<any> {
-    return this.httpClient.get(this.url+ext)
-    .pipe(
-      catchError(this.handleError)
-    )
-  }
+  // Get(ext:any): Observable<any> {
+  //   return this.httpClient.get(this.url+ext)
+  //   .pipe(
+  //     catchError(this.handleError)
+  //   )
+  // }
 
-  Post(ext:any, data:any) {
-    return new Promise((resolve, reject) => {
-      this.httpClient.post(this.url+ext, JSON.stringify(data)).
-      pipe(
-        catchError(this.handleError)
-      )
-    })
-  }
+  // Post(ext:any, data:any) {
+  //   return new Promise((resolve, reject) => {
+  //     this.httpClient.post(this.url+ext, JSON.stringify(data)).
+  //     pipe(
+  //       catchError(this.handleError)
+  //     )
+  //   })
+  // }
 
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-      Swal.close()
-    } else {
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
-      Swal.close()
-    }
-    console.log(errorMessage);
-    Swal.close()
-    return throwError(errorMessage);
-  };
+  // handleError(error: HttpErrorResponse) {
+  //   let errorMessage = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     errorMessage = error.error.message;
+  //     Swal.close()
+  //   } else {
+  //     errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+  //     Swal.close()
+  //   }
+  //   console.log(errorMessage);
+  //   Swal.close()
+  //   return throwError(errorMessage);
+  // };
 }
