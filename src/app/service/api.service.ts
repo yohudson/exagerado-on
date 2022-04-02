@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class ApiService {
 
-  url = 'https://app.swaggerhub.com/apis/hudson.coelho/exageradoon/1.0.0'
+  url = 'https://api-exagerado-on.herokuapp.com/'
 
   constructor(
     private httpClient: HttpClient
