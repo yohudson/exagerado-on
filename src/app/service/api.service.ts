@@ -9,10 +9,13 @@ import Swal from 'sweetalert2';
 })
 export class ApiService {
 
-  url = 'https://api-exagerado-on.herokuapp.com/'
+  url_dev = 'http://localhost:3000/'
+  url_prod = 'https://api-exagerado-on.herokuapp.com/'
+
+  url = this.url_dev
 
   constructor(
-    private httpClient: HttpClient
+    private http: HttpClient
   ) { }
 
   httpOptions = {
@@ -25,29 +28,27 @@ export class ApiService {
     })
   }
 
-  Get(ext:any): Observable<any> {
-    return this.httpClient.get(this.url+ext)
+  Get = (ext:any): Observable<any> => {
+    return this.http.get(this.url+ext)
     .pipe(
       catchError(this.handleError)
     )
   }
 
-  Post(ext:any, data:any) {
-    return new Promise((resolve, reject) => {
-      this.httpClient.post(this.url+ext, JSON.stringify(data)).
-      pipe(
+  Post = (ext:any, data:any): Observable<any> => {
+    return this.http.post(this.url+ext, data)
+    .pipe(
         catchError(this.handleError)
       )
-    })
   }
 
-  handleError(error: HttpErrorResponse) {
+  handleError = (error: HttpErrorResponse) => {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;
       Swal.close()
     } else {
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      errorMessage = `${error.status}: ${error.message}`;
       Swal.close()
     }
     console.log(errorMessage);

@@ -4,6 +4,7 @@ import { Injectable } from "@angular/core";
 export class Global {
   nav: boolean = false;
   displayMenu: boolean = false;
+  usuario: any = {}
 
   constructor() {}
 

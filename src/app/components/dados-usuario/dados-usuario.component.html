@@ -13,24 +13,27 @@
             <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" required>
         </div>
         <div class="row">
-            <label class="control-label">Agora vamos descobrir: quantos aninhos você tem?<b class="obrigatorio">*</b></label>
+            <label class="control-label">Agora vamos descobrir quantos aninhos você tem! Conta pra gente sua data de nascimento<b class="obrigatorio">*</b></label>
             <input type="date" class="form-control" [(ngModel)]="usuario.data_nascimento" name="data_nascimento" id="data_nascimento">
         </div>
         <div class="row">
             <label class="control-label">E conta pra gente, como você se identifica?</label>
-            <input type="text" class="form-control">
+            <select class="form-control" [(ngModel)]="usuario.genero" name="genero" id="genero">
+                <option [ngValue]="g.genero_id" *ngFor="let g of listaGeneros">{{g.nome}}</option>
+            </select>
         </div>
-        <div class="row">
+        <div class="row ">
             <label class="control-label">Agora, precisamos criar uma senha pra você<b class="obrigatorio">*</b></label>
             <input type="password" [(ngModel)]="usuario.senha" name="senha" class="form-control" required>
         </div>
-        <div class="row">
+        <div class="row ">
             <label class="control-label">E precisamos que você confirme que sabe a senha que escolheu<b class="obrigatorio">*</b></label>
             <input type="password" [(ngModel)]="usuario.confirma_senha" name="confirmar_senha" class="form-control" required>
         </div>
         <div class="row button-row">
-            <button class="btn btn-secondary" [routerLink]="'/login'">Voltar</button>
-            <button class="btn btn-success" (click)="proximoPasso(2)">Próximo</button>
+            <button class="btn btn-secondary" [routerLink]="'/login'">Ir para login</button>
+            <button class="btn btn-success" (click)="proximoPasso(2)">Salvar</button>
+            <!-- <button class="btn btn-primary" (click)="irQuestionario(2)">Próxima página</button> -->
         </div>
     </form>
 </div>

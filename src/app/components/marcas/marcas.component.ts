@@ -1,5 +1,9 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ApiService } from '../../service/api.service';
+import { Global } from '../../global';
+import Swal from 'sweetalert2';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-marcas',
@@ -13,34 +17,37 @@ export class MarcasComponent implements OnInit {
   marcaSelecionada: any = '';
 
   @Output() passo = new EventEmitter<number>();
-  constructor() { }
+  constructor(
+    private service: ApiService,
+    public global: Global,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.listaMarcas = [
-      {nome: 'Nike', segmento: 'esportes', id: 1},
-      {nome: 'Adidas', segmento: 'esportes', id: 2},
-      {nome: 'H&M', segmento: 'esportes', id: 3},
-      {nome: 'Zara', segmento: 'esportes', id: 4},
-      {nome: 'Louis Vitton', segmento: 'esportes', id: 5},
-      {nome: 'Uniqlo', segmento: 'esportes', id: 6},
-      {nome: 'Hermès', segmento: 'esportes', id: 7},
-      {nome: 'Rolex', segmento: 'esportes', id: 8},
-      {nome: 'Gucci', segmento: 'esportes', id: 9},
-      {nome: 'Cartier', segmento: 'esportes', id: 10},
-      {nome: 'Ralph Lauren', segmento: 'esportes', id: 11},
-      {nome: 'Lacoste', segmento: 'esportes', id: 12},
-      {nome: 'Tommy Hilfiger', segmento: 'esportes', id: 13},
-      {nome: 'Victor Hugo', segmento: 'esportes', id: 14},
-    ];
+    this.obterListaMarcas();
+  }
+
+  obterListaMarcas = () => {
+    this.service.Get(`brands`).subscribe(
+      result => {
+        console.log(result)
+        this.listaMarcas = result
+      }
+    )
   }
 
   addFavoritas = (f:any) =>{
     var marca = f.target.value;
-    var index = this.marcasFavoritas.indexOf(marca)
-      if (index == '-1'){
-        this.marcasFavoritas.push(marca)
+    for (let item of this.listaMarcas) {
+      if (marca.toUpperCase() === item.nome.toUpperCase()){
+        var index = this.marcasFavoritas.indexOf(marca)
+        if (index == '-1'){
+          this.marcasFavoritas.push(marca)
+        }
+        else return
       }
-    console.log(this.marcasFavoritas)
+    }
+    
   }
   
   removerFavorita = (m: any)=>{
@@ -48,6 +55,77 @@ export class MarcasComponent implements OnInit {
     this.marcasFavoritas.splice(x, 1); 
   }
 
+  salvarFavoritos = () => {
+    var obj:any = {};
+    this.listaIds(obj).then(
+      result => {
+        obj.lista_marcas = result;
+        obj.user_uuid = this.global.usuario.user_uuid;
+        this.manterFavoritos(obj).then(
+          result => {
+            Swal.close;
+            Swal.fire('Sucesso!', 'Favoritos foram enviados com sucesso!', 'success').then(
+              result => {
+                if (result['value']) {
+                  this.router.navigate(['/login']);
+                }
+              }
+            )
+          },
+          error => {
+            Swal.close();
+            Swal.fire('Erro!', error.toString(), 'error');
+          }
+        )
+      },
+      error => {
+        Swal.close();
+            Swal.fire('Erro!', error.toString(), 'error');
+      }
+    )  
+  }
+
+  buscaMarca = (marca:any) => {
+    return new Promise((resolve, reject) => {
+      for (let item of this.listaMarcas) {
+        if (marca === item.nome){
+          resolve(item.marca_uuid)
+        }
+        else reject
+      }
+    })
+  }
+
+  manterFavoritos = (obj:any) => {
+    return new Promise((resolve, reject) => {
+      this.service.Post(`favorites`,obj).subscribe(
+        result => {
+          resolve('Favoritos foram enviados com sucesso!')
+        },
+        error => {
+          reject('Falha ao enviar os favoritos!')
+        }
+      )
+    })
+  }
+
+  listaIds = (obj:any) => {
+    return new Promise((resolve, reject) => {
+      var lista_marcas: any = []
+      for (let item of this.marcasFavoritas){
+        this.buscaMarca(item).then(
+          result => {
+            console.log(result)
+            lista_marcas.push(result);
+          },
+          error => {
+            reject('Falha ao listar as marcas')
+          }
+        )
+      }
+      resolve(lista_marcas);
+    })
+  }
   
   proximoPasso = (value: number) => {
     this.passo.emit(value)

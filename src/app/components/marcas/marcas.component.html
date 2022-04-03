@@ -4,7 +4,7 @@
 
             <label for="dataList" class="control-label">E, pra finalizar agora, conta pra gente quais as marcas que
                 aceleram seu coração por aqui.</label>
-            <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o nome para filtrar..." (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada" onfocus="this.value=''" onchange="this.blur();">
+            <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o nome para filtrar..." name="marcas" (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada" onfocus="this.value=''" onchange="this.blur();">
             <datalist id="datalistOptions">
                 <option *ngFor="let m of listaMarcas" [value]="m.nome">
             </datalist>
@@ -19,8 +19,8 @@
         </div>
 
         <div class="row button-row">
-            <button class="btn btn-secondary" (click)="proximoPasso(2)">Voltar</button>
-            <button class="btn btn-success">Salvar</button>
+            <button class="btn btn-secondary" [routerLink]="'/login'">Ir para login</button>
+            <button class="btn btn-success" (click)="salvarFavoritos()">Salvar</button>
         </div>
     </form>
 </div>

@@ -16,12 +16,6 @@
 
         <div class="row">
             <label class="control-label">Já tinha vindo ao EXAGERADO?</label>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="radio" [(ngModel)]="conhece_evento" name="conhece_evento" id="sim">Siiiim!
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" [(ngModel)]="conhece_evento" name="conhece_evento" id="nao">Não, é a primeira vez!
-            </div> -->
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="conhece_evento" (change)="indicaConheceEvento()">
                 <label class="form-check-label" for="conhece_evento" *ngIf="conhece_evento">Siiiim, conheço de outros carnavais!</label>
@@ -114,8 +108,9 @@
         </div>
 
         <div class="row button-row">
-            <button class="btn btn-secondary" (click)="proximoPasso(1)">Voltar</button>
-            <button class="btn btn-success" (click)="proximoPasso(3)">Próximo</button>
+            <button class="btn btn-secondary" [routerLink]="'/login'">Ir para login</button>
+            <button class="btn btn-success" (click)="proximoPasso(3)">Salvar</button>
+            <!-- <button class="btn btn-primary" (click)="irMarcas(3)">Próxima página</button> -->
         </div>
     </form>
 </div>
