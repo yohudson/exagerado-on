@@ -1,15 +1,15 @@
 <div class="row filtro">
     <div class="col">
         <label for="segmento" class="control-label">Segmento</label>
-        <input type="text" class="form-control">
-    </div>
-    <div class="col">
-        <label for="loja" class="control-label">Loja</label>
-        <input type="text" class="form-control">
+        <select class="form-control" [(ngModel)]="segmento" name="segmento" id="segmento">
+            <option [ngValue]="s.segmento_uuid" *ngFor="let s of listaSegmentos">{{s.nome}}</option>
+        </select>
     </div>
     <div class="col">
         <label for="marca" class="control-label">Marcas</label>
-        <input type="text" class="form-control">
+        <select class="form-control" [(ngModel)]="marca" name="marca" id="marca">
+            <option [ngValue]="m.marca_uuid" *ngFor="let m of listaMarcas">{{m.nome}}</option>
+        </select>
     </div>
 </div>
 
