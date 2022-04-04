@@ -12,7 +12,7 @@ export class ApiService {
   url_dev = 'http://localhost:3000/'
   url_prod = 'https://api-exagerado-on.herokuapp.com/'
 
-  url = this.url_prod
+  url = this.url_prod;
 
   constructor(
     private http: HttpClient
