@@ -42,8 +42,7 @@ export class ApiService {
       )
   }
 
-    console.log(ext)
-    console.log(data)
+  Put = (ext:any, data:any): Observable<any> => {
     return this.http.put(this.url+ext, data)
     .pipe(
         catchError(this.handleError)
