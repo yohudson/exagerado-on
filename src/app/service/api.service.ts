@@ -42,6 +42,14 @@ export class ApiService {
       )
   }
 
+    console.log(ext)
+    console.log(data)
+    return this.http.put(this.url+ext, data)
+    .pipe(
+        catchError(this.handleError)
+      )
+  }
+
   handleError = (error: HttpErrorResponse) => {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

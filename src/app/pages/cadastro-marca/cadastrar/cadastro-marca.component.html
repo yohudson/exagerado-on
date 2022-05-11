@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <div class="pull-left">
+                <button class="btn btn-secondary" [routerLink]="'/listar-marcas'" title="Voltar para a lista">
+                        <i class="material-icons">keyboard_return</i>
+                    </button>
+                <h2 *ngIf="!editarMarca">&emsp;Adicionar nova marca</h2>
+                <h2 *ngIf="editarMarca">&emsp;Editar marca</h2>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">Status</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="statusMarca" (change)="mudaStatusMarca()" [checked]="marca.status">
+                <label class="form-check-label" for="statusMarca" *ngIf="marca.status">Ativo</label>
+                <label class="form-check-label" for="statusMarca" *ngIf="!marca.status">Desativado</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">Nome da marca</label>
+            <input type="text" class="form-control" placeholder="Nome do marca" [(ngModel)]="marca.nome" />
+        </div>
+        <div class="row">
+            <label class="control-label">Segmento</label>
+            <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o segmento para filtrar..." name="segmentos" (change)="addSegmentos($event)" [(ngModel)]="segmentoIndicado" onfocus="this.value=''" onchange="this.blur();">
+            <datalist id="datalistOptions">
+            <option *ngFor="let s of listaSegmentos" [value]="s.nome">
+        </datalist>
+        </div>
+        <div class="row">
+            <div class="lista-marcas">
+                <span class="badge rounded-pill bg-grey text-dark" *ngFor="let item of segmentoSelecionado">{{item}}
+                <span class="material-icons" (click)="removerSegmento(item)">close</span>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="align-center">
+                <button class="btn btn-success" (click)="salvarMarca()" *ngIf="!editarMarca" title="Adicionar marca">
+                    <i class="material-icons">save</i>
+                </button>
+                <button class="btn btn-success" (click)="atualizarMarca()" *ngIf="editarMarca" title="Salvar edição">
+                    <i class="material-icons">save</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,28 +1,43 @@
-<div class="card" *ngFor="let a of listaAtracoes">
-    <div class="row m-0 g-0">
-        <div class="col-md-4">
-            <img src="https://www.casamagalhaes.com.br/blog/wp-content/uploads/2017/10/Happy-Hour-descubra-tudo-que-voc%C3%AA-precisa-saber-e1559071879405.jpg" class="img-fluid rounded-start" alt="...">
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <nav>
+                <ul class="pagination pagination-lg justify-content-center">
+                    <li class="page-item" (click)="mudarData($event)" *ngFor="let dia of diasAgenda; let i = index" [id]="i" [ngClass]="{'active': indexNav === i}">
+                        <a class="page-link">{{dia}}</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">{{a.nome}}</h5>
-                <h4>{{a.data_hora_inicio}}</h4>
-                <h4>{{a.data_hora_fim}}</h4>
-                <h4>{{a.local}}</h4>
-                <p class="card-text">{{a.observacao}}</p>
+        <div class="row justify-content-center">
+            <div class="col-xs-12 col-md-8">
+                <div class="card" *ngFor="let a of exibirAtracoes">
+                    <div class="row m-0 g-0">
+                        <div class="card-body">
+                            <div class="row row-card-attraction">
+                                <h3 class="card-title bold"><span class="material-icons">
+                                    attractions
+                                </span>&emsp;{{a.atracao_nome}}</h3>
+                            </div>
+                            <div class="row row-card-attraction">
+                                <h4><span class="material-icons bold">
+                                    schedule
+                                </span>&emsp;Dia {{a.data_inicio}}, de {{a.hora_inicio}} às {{a.hora_fim}}</h4>
+                            </div>
+                            <div class="row row-card-attraction">
+                                <h4 class="bold"><span class="material-icons">
+                                    pin_drop
+                                </span>&emsp;{{a.local}}</h4>
+                            </div>
+                            <div class="row row-card-attraction">
+                                <p class="card-text" *ngIf="a.descricao"><span class="material-icons bold">
+                                    description
+                                </span>&emsp;{{a.descricao}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="card" *ngFor="let a of listaAtracoes">
-    <img src="https://www.casamagalhaes.com.br/blog/wp-content/uploads/2017/10/Happy-Hour-descubra-tudo-que-voc%C3%AA-precisa-saber-e1559071879405.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <h5 class="card-title">{{a.nome}}</h5>
-        <h4>{{a.data_hora_inicio}}</h4>
-        <h4>{{a.data_hora_fim}}</h4>
-        <h4>{{a.local}}</h4>
-        <p class="card-text">{{a.observacao}}</p>
-    </div>
-</div> -->

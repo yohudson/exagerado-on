@@ -3,6 +3,8 @@ import { ApiService } from '../../service/api.service';
 import { Marca } from '../../models/marca.model';
 import Swal from 'sweetalert2';
 
+import { AuthService } from "../../shared/services/auth.service";
+
 @Component({
   selector: 'app-lista-marcas',
   templateUrl: './lista-marcas.component.html',
@@ -19,7 +21,8 @@ export class ListaMarcasComponent implements OnInit {
   marcasFiltradas: any = []
 
   constructor(
-    private service: ApiService
+    private service: ApiService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -32,19 +35,29 @@ export class ListaMarcasComponent implements OnInit {
       result => {
         this.listaSegmentos = result;
         this.listaSegmentos.unshift({segmento_uuid:0,nome:"Todos"})
-        this.obterMarcas().then(
+        this.obterLojas().then(
           result => {
-            Swal.close()
+            this.listaLojas = result;
+            this.listaLojas.unshift({loja_uuid: '0', loja_nome:'Todas'})
+            this.obterMarcas().then(
+              result => {
+                Swal.close()
+              },
+              error => {
+                Swal.close()
+                Swal.fire('Atenção!', 'Não foi possível carregar as marcas', 'warning')
+              }
+            )
           },
           error => {
             Swal.close()
-            Swal.fire('Atenção!', 'Não foi possível carregar os dados para a tela', 'warning')
+            Swal.fire('Atenção!', error, 'warning')
           }
         )
       },
       error => {
         Swal.close()
-        Swal.fire('Atenção!', 'Não foi possível carregar os dados para a tela', 'warning')
+        Swal.fire('Atenção!', 'Não foi possível carregar os segmentos', 'warning')
       }
     )
   }
@@ -57,7 +70,6 @@ export class ListaMarcasComponent implements OnInit {
           Object.assign(this.marcasFiltradas, this.listaMarcas);
           this.obterSegmentoMarcas().then(
             result => {
-              console.log(result)
               resolve('Marcas carregadas com sucesso')
             },
             error => {}
@@ -71,14 +83,30 @@ export class ListaMarcasComponent implements OnInit {
     })
   }
 
+  obterLojas = () => {
+    return new Promise((resolve, reject) => {
+      this.service.Get(`stores`).subscribe(
+        result => {
+          resolve(result);
+
+        },
+        error=> {
+          reject('Não foi possível carregar as lojas')
+        }
+      )
+    })
+  }
+
   filtroSegmentos = (seg:any) => {
+    this.loja = 0;
     Swal.showLoading()
     this.marcasFiltradas = [];
     if (seg != 0) {
-      console.log(seg)
       for(let marca of this.listaMarcas){
-        if(marca.segmento_uuid === seg){
-          this.marcasFiltradas.push(marca)
+        for (let segmentoMarca of marca.lista_segmento_uuid){
+          if (segmentoMarca === seg){
+            this.marcasFiltradas.push(marca)
+          }
         }
       }
       Swal.close()
@@ -100,6 +128,29 @@ export class ListaMarcasComponent implements OnInit {
       }
       resolve(this.marcasFiltradas)
     })
+  }
+
+  filtroLoja = (lojaFiltro:any) => {
+    this.segmento = 0;
+    Swal.showLoading()
+    this.marcasFiltradas = []
+    if(lojaFiltro === '0') {
+      this.marcasFiltradas = this.listaMarcas;
+      Swal.close();
+      return;
+    }
+    for (let lojaEvento of this.listaLojas) {
+      if (lojaFiltro == lojaEvento.loja_uuid){
+        for (let marcaVendida of lojaEvento.marcas_vendidas){
+          for (let marca of this.listaMarcas){
+            if (marca.marca_uuid === marcaVendida){
+              this.marcasFiltradas.push(marca)
+            }
+          }
+        }
+      }
+    }
+    Swal.close()
   }
 
 }

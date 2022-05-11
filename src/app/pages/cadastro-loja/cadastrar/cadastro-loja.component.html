@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <div class="pull-left">
+                <button class="btn btn-secondary" [routerLink]="'/listar-lojas'" title="Voltar para a lista">
+                        <i class="material-icons">keyboard_return</i>
+                    </button>
+                <h2 *ngIf="!editarLoja">&emsp;Adicionar nova loja</h2>
+                <h2 *ngIf="editarLoja">&emsp;Editar loja</h2>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">Status</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="statusLoja" (change)="mudaStatusLoja()" [checked]="loja.status">
+                <label class="form-check-label" for="statusLoja" *ngIf="loja.status">Ativo</label>
+                <label class="form-check-label" for="statusLoja" *ngIf="!loja.status">Desativado</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">CNPJ</label>
+            <input type="text" class="form-control" placeholder="CNPJ" [(ngModel)]="loja.cnpj" />
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label class="control-label">Nome da loja</label>
+                <input type="text" class="form-control" placeholder="Nome da loja" [(ngModel)]="loja.nome_loja" />
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label class="control-label">Localização</label>
+                <input type="text" class="form-control" placeholder="Localização" [(ngModel)]="loja.localizacao" />
+            </div>
+        </div>
+        <!-- segmentos -->
+        <div class="row">
+            <label class="control-label">Segmento</label>
+            <input class="form-control" list="listaSegmentosOpcao" id="listaSegmentos" placeholder="Digite o segmento para filtrar..." name="segmentos" (change)="addSegmentos($event)" [(ngModel)]="segmentoIndicado" onfocus="this.value=''" onchange="this.blur();">
+            <datalist id="listaSegmentosOpcao">
+                    <option *ngFor="let s of listaSegmentos" [value]="s.nome">
+                </datalist>
+        </div>
+        <div class="row">
+            <div class="lista-marcas">
+                <span class="badge rounded-pill bg-grey text-dark" *ngFor="let item of segmentoSelecionado">{{item}}
+              <span class="material-icons" (click)="removerSegmento(item)">close</span>
+                </span>
+            </div>
+        </div>
+        <!-- marcas vendidas -->
+        <div class="row">
+            <label class="control-label">Marcas vendidas</label>
+            <input class="form-control" list="listaMarcasOpcao" id="listaMarcas" placeholder="Digite a marca para filtrar..." name="marcas" (change)="addMarcas($event)" [(ngModel)]="marcaIndicada" onfocus="this.value=''" onchange="this.blur();">
+            <datalist id="listaMarcasOpcao">
+                    <option *ngFor="let m of listaMarcas" [value]="m.nome">
+                </datalist>
+        </div>
+        <div class="row">
+            <div class="lista-marcas">
+                <span class="badge rounded-pill bg-grey text-dark" *ngFor="let item of marcaSelecionada">{{item}}
+            <span class="material-icons" (click)="removerMarca(item)">close</span>
+                </span>
+            </div>
+        </div>
+        <!-- dados do responsável e contato -->
+        <div class="row">
+            <label class="control-label">Nome do responsável</label>
+            <input type="text" class="form-control" placeholder="Nome do responsável" [(ngModel)]="loja.nome_responsavel" />
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <label class="control-label">Telefone de contato</label>
+                <input type="text" class="form-control" placeholder="Telefone de contato" [(ngModel)]="loja.telefone_contato" />
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <label class="control-label">E-mail de contato</label>
+                <input type="text" class="form-control" placeholder="E-mail de contato" [(ngModel)]="loja.email_contato" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="align-center">
+                <button class="btn btn-success" (click)="salvarLoja()" *ngIf="!editarLoja" title="Salvar loja">
+                    <i class="material-icons">save</i>
+                </button>
+                <button class="btn btn-success" (click)="atualizarLoja()" *ngIf="editarLoja" title="Salvar edição">
+                    <i class="material-icons">save</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

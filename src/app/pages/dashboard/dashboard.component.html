@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <div class="pull-left">
+                <h2>Dashboard</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="pull-left">
+                                <h3>Total de lojas</h3>
+                            </div>
+                            <div class="pull-right">
+                                <h2 class="indicador">{{numeroLojas}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="pull-left">
+                                <h3>Total de usuários</h3>
+                            </div>
+                            <div class="pull-right">
+                                <h2 class="indicador">{{totalUsuarios}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3>Lojas por segmento</h3>
+                            <apx-chart [series]="marcaSegmento.series" [chart]="marcaSegmento.chart" [labels]="marcaSegmento.labels" [fill]="marcaSegmento.fill" [dataLabels]="marcaSegmento.dataLabels" [responsive]="marcaSegmento.responsive"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3>Usuários por gênero</h3>
+                            <apx-chart [series]="graficoGenero.series" [chart]="graficoGenero.chart" [labels]="graficoGenero.labels" [fill]="graficoGenero.fill" [dataLabels]="graficoGenero.dataLabels" [responsive]="graficoGenero.responsive"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3>Marcas favoritas</h3>
+                            <apx-chart [series]="graficoMarcasFavoritas.series" [chart]="graficoMarcasFavoritas.chart" [labels]="graficoMarcasFavoritas.labels" [fill]="graficoMarcasFavoritas.fill" [dataLabels]="graficoMarcasFavoritas.dataLabels" [responsive]="graficoMarcasFavoritas.responsive"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <apx-chart [series]="faixaEtariaFrequentadores.series" [chart]="faixaEtariaFrequentadores.chart" [xaxis]="faixaEtariaFrequentadores.xaxis" [title]="faixaEtariaFrequentadores.title"></apx-chart>
+        </div>
+    </div>
+</div>

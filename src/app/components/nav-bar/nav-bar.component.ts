@@ -16,6 +16,15 @@ export class NavBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    var log = JSON.parse(localStorage.getItem('login') || '{}')
+    if(!log){
+      this.router.navigate(['/login']);
+      this.global.nav = false;
+    }
+    else{
+      this.global.nav = true;
+      this.global.usuario = log
+    }
   }
 
   logout = () =>{

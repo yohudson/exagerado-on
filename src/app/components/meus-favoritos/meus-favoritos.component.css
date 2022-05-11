@@ -1,0 +1,28 @@
+.lista-marcas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    font-size: 12pt;
+    margin: 10px 5px;
+}
+
+.badge:first-of-type {
+    margin-left: 0;
+}
+
+.material-icons {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.bg-grey {
+    background-color: #ddd;
+}
+
+.row>button {
+    width: auto !important;
+}

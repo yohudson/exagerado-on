@@ -14,12 +14,18 @@
             </div>
             <div class="row">
                 <button class="btn btn-success" (click)="realizarLogin()"><span class="material-icons">login</span>&ensp;Entrar</button>
-                <!-- <button class="btn btn-primary">Entrar FB</button>
-                <button class="btn btn-danger">Entrar Google</button> -->
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-google" (click)="authService.GoogleAuth()">
+                    <img src="../../../assets/img/btn-google.svg"/>
+                    <span>&ensp;Entrar com Google</span>
+                </button>
             </div>
             <div class="row links">
+                <!-- <div class="forgotPassword">
+                    <span [routerLink]="'/forgot-password'">Forgot Password?</span>
+                </div> -->
                 <p>Ainda não tem cadastro? <a [routerLink]="'/cadastro'">É fácil e rápido, vem!</a></p>
-                <!-- <p>Esqueceu a senha? <a [routerLink]="'/recuperar-senha'">Recupere-a aqui!</a></p> -->
             </div>
         </form>
     </div>

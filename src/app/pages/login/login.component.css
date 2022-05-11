@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.row {
+    justify-content: center;
+}
+
 button {
     margin: 8px 0
 }
@@ -47,4 +51,27 @@ div.logo {
     align-items: center;
     justify-content: center;
     width: 100vw;
+}
+
+img {
+    height: 36px;
+}
+
+.material-icons {
+    font-size: 28px;
+}
+
+.btn {
+    font-weight: 500;
+    padding: 8px;
+}
+
+.btn-google {
+    color: #fff;
+    background-color: #4285F4;
+}
+
+.btn-google:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
 }

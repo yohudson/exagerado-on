@@ -1,3 +1,27 @@
 .row>button {
     width: auto !important;
 }
+
+img {
+    height: 36px;
+}
+
+.material-icons {
+    font-size: 28px;
+}
+
+.btn {
+    font-weight: 500;
+    padding: 8px;
+    align-items: center;
+}
+
+.btn-google {
+    color: #fff;
+    background-color: #4285F4;
+}
+
+.btn-google:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}

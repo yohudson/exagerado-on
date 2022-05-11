@@ -1,0 +1,44 @@
+.col-xs-6 {
+    margin: 0;
+    padding: 0;
+    width: calc(50% - 5px);
+}
+
+.col-xs-6:first-of-type {
+    margin-right: 5px;
+}
+
+.col-xs-6:last-of-type {
+    margin-left: 5px;
+}
+
+
+/* badge */
+
+.lista-marcas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    font-size: 12pt;
+    margin: 10px 5px;
+}
+
+.badge:first-of-type {
+    margin-left: 0;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+.bg-grey {
+    background-color: #ddd;
+}
+
+.row>button {
+    width: auto !important;
+}

@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <div class="pull-left">
+                <button class="btn btn-secondary" [routerLink]="'/listar-agenda'" title="Voltar para a lista">
+                <i class="material-icons">keyboard_return</i>
+            </button>
+                <h2 *ngIf="!editarAgenda">&emsp;Programar nova atração</h2>
+                <h2 *ngIf="editarAgenda">&emsp;Editar agenda</h2>
+            </div>
+        </div>
+        <div class="row row-card">
+            <div class="col-md-4 col-xs-12">
+                <div class="row">
+                    <div class="card" [ngClass]="agenda.status == true ? 'border-success' : 'border-warning'">
+                        <div class="card-header" [ngClass]="agenda.status == true ? 'bg-success text-white' : 'bg-warning'"><b>Atração: </b>{{agenda.atracao_nome}}</div>
+                        <div class="card-body">
+                            <p class="card-text"><b>Início: </b>{{data_inicio_string}} {{hora_inicio_string}}</p>
+                            <p class="card-text"><b>Fim: </b>{{data_inicio_string}} {{hora_fim_string}}</p>
+                            <p class="card-text"><b>Local: </b>{{agenda.local}}</p>
+                            <p class="card-text" *ngIf="agenda.descricao"><b>Descrição: </b>{{agenda.descricao}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Status</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="statusAgenda" (change)="mudaStatusAgenda()" [checked]="agenda.status">
+                            <label class="form-check-label" for="statusAgenda" *ngIf="agenda.status">Confirmado</label>
+                            <label class="form-check-label" for="statusAgenda" *ngIf="!agenda.status">Não confirmado</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Nome da atração</label>
+                        <input class="form-control" list="listaAtracoesOpcao" id="listaAtracoes" placeholder="Digite a atração para filtrar..." name="atracoes" (change)="addAtracao($event)" [(ngModel)]="atracaoSelecionada">
+                        <datalist id="listaAtracoesOpcao">
+                        <option *ngFor="let a of listaAtracoes" [value]="a.atracao_nome">
+                    </datalist>
+                    </div>
+                </div>
+                <div class="row row-data">
+                    <div class="col">
+                        <label class="control-label">Data da atração</label>
+                        <input type="date" class="form-control" [(ngModel)]="data_inicio" />
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Hora de início</label>
+                        <input type="time" class="form-control" [(ngModel)]="hora_inicio" />
+                    </div>
+                    <div class="col">
+                        <label class="control-label">Hora de fim</label>
+                        <input type="time" class="form-control" [(ngModel)]="hora_fim" />
+                    </div>
+                    <div class="col col-button">
+                        <button class="btn btn-primary" (click)="addPeriodo()" title="Adicionar período">
+                    <i class="material-icons">add</i>
+                </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Local da atração</label>
+                        <input type="text" class="form-control" placeholder="Local da atração" [(ngModel)]="local" (blur)="addLocal()" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="control-label">Descrição</label>
+                        <textarea class="form-control" placeholder="Descrição da atração" [(ngModel)]="descricao" rows="3" (blur)="addDescricao()"></textarea>
+                    </div>
+                </div>
+                <div class="row align-center">
+                    <button class="btn btn-success" (click)="salvarAgenda()" *ngIf="!editarAgenda" title="Salvar agenda">
+                  <i class="material-icons">save</i>
+              </button>
+                    <button class="btn btn-success" (click)="atualizarAgenda()" *ngIf="editarAgenda" title="Salvar edição">
+                  <i class="material-icons">save</i>
+              </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.row-data {
+    align-items: end;
+}
+
+.row-data .col:last-of-type {
+    flex: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+.row-card {
+    align-items: start;
+}
+
+.row .card {
+    padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .row .card {
+        margin: 0 1rem;
+        padding: 0;
+        flex: 1;
+    }
+    .form-switch {
+        padding-left: 2.5em;
+    }
+}

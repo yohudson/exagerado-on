@@ -1,0 +1,39 @@
+.page-item {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48
+}
+
+.row-card-attraction h4,
+.row-card-attraction h3,
+.row-card-attraction p {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.row-card-attraction h4,
+.row-card-attraction h3 {
+    align-items: center;
+}
+
+.row-card-attraction p {
+    align-items: flex-start;
+}
+
+.card-body {
+    padding: .5rem;
+}
+
+.card {
+    margin-bottom: 10px
+}
+
+.card:last-of-type {
+    margin-bottom: 0
+}

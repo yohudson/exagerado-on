@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="pull-left">
+                    <h2>Lista de atrações</h2>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-warning" [routerLink]="'/listar-agenda'" title="Criar agenda">
+                        <i class="material-icons">calendar_today</i>
+                    </button>
+                    <button class="btn btn-primary" [routerLink]="'/add-atracao'" title="Adicionar nova atração">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped table-bordered table-hover table-responsive table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of listaAtracoes">
+                            <td>{{a.atracao_nome}}</td>
+                            <td>{{a.nome_contato}}</td>
+                            <td>{{a.telefone_contato}}</td>
+                            <td>{{a.email_contato}}</td>
+                            <td>{{a.status == true ? 'Ativo' : 'Inativo'}}</td>
+                            <td>
+                                <button class="btn btn-warning" [routerLink]="'/editar-atracao/'+a.atracao_uuid" [queryParams]="{uuid:a.atracao_uuid,nome:a.atracao_nome,responsavel:a.nome_contato,telefone:a.telefone_contato,email:a.email_contato,status:a.status}" title="Editar">
+                          <i class="material-icons">edit</i>
+                      </button>
+                                <button class="btn btn-success" *ngIf="a.status == false" (click)="alterarStatusAtracao(a)" title="Ativar">
+                          <i class="material-icons">power_settings_new</i>
+                      </button>
+                                <button class="btn btn-danger" *ngIf="a.status == true" (click)="alterarStatusAtracao(a)" title="Desativar">
+                          <i class="material-icons">power_settings_new</i>
+                      </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!temAtracao">
+                            <td colspan="6" [ngClass]="{'colspan':!temAtracao}">
+                                <h4>Não há atrações cadastradas para exibir</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

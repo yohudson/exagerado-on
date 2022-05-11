@@ -1,0 +1,5 @@
+.table td:last-of-type {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: flex;
+}

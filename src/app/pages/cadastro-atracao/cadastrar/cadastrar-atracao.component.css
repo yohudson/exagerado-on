@@ -1,0 +1,13 @@
+.col-xs-6 {
+    margin: 0;
+    padding: 0;
+    width: calc(50% - 5px);
+}
+
+.col-xs-6:first-of-type {
+    margin-right: 5px;
+}
+
+.col-xs-6:last-of-type {
+    margin-left: 5px;
+}

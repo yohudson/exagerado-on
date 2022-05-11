@@ -1,0 +1,28 @@
+<div class="col">
+    <div class="row">
+        <div class="form">
+            <form>
+                <div class="row">
+                    <div class="lista-marcas">
+                        <span class="badge rounded-pill bg-grey text-dark" *ngFor="let f of marcasFavoritas">{{f}}
+                            <span class="material-icons" (click)="removerFavorita(f)">close</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="dataList" class="control-label" *ngIf="!possuiMarcasFavoritas">Conta pra gente quais as marcas que aceleram seu coração.</label>
+                    <label for="dataList" class="control-label" *ngIf="possuiMarcasFavoritas">Migs, você pode mudar quais as marcas que aceleram seu coração.</label>
+                    <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o nome para filtrar..." name="marcas" (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada" onfocus="this.value=''" onchange="this.blur();">
+                    <datalist id="datalistOptions">
+                        <option *ngFor="let m of listaMarcas" [value]="m.nome">
+                    </datalist>
+                </div>
+
+                <div class="row button-row">
+                    <button class="btn btn-success" (click)="salvarFavoritos()">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,8 @@ import { ApiService } from '../../service/api.service';
 import { Global } from '../../global';
 import Swal from 'sweetalert2';
 
+import { AuthService } from "../../shared/services/auth.service";
+
 @Component({
   selector: 'app-dados-usuario',
   templateUrl: './dados-usuario.component.html',
@@ -17,7 +19,8 @@ export class DadosUsuarioComponent implements OnInit {
   @Output() passo = new EventEmitter<number>();
   constructor(
     private service: ApiService,
-    public global: Global
+    public global: Global,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {

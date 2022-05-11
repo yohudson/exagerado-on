@@ -1,7 +1,6 @@
 <div class="form">
     <form>
         <div class="row">
-
             <label for="dataList" class="control-label">E, pra finalizar agora, conta pra gente quais as marcas que
                 aceleram seu coração por aqui.</label>
             <input class="form-control" list="datalistOptions" id="dataList" placeholder="Digite o nome para filtrar..." name="marcas" (change)="addFavoritas($event)" [(ngModel)]="marcaSelecionada" onfocus="this.value=''" onchange="this.blur();">

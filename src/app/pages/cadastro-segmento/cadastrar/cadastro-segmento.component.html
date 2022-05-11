@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="col">
+        <div class="row">
+            <div class="pull-left">
+                <button class="btn btn-secondary" [routerLink]="'/listar-segmentos'" title="Voltar para a lista">
+                    <i class="material-icons">keyboard_return</i>
+                </button>
+                <h2 *ngIf="!editarSegmento">&emsp;Criar novo segmento</h2>
+                <h2 *ngIf="editarSegmento">&emsp;Editar segmento</h2>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">Status</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="statusSegmento" (change)="mudaStatusSegmento()" [checked]="segmento.status">
+                <label class="form-check-label" for="statusSegmento" *ngIf="segmento.status">Ativo</label>
+                <label class="form-check-label" for="statusSegmento" *ngIf="!segmento.status">Desativado</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="control-label">Nome do segmento</label>
+            <input type="text" class="form-control" placeholder="Nome do segmento" [(ngModel)]="segmento.nome" />
+        </div>
+        <div class="row">
+            <div class="align-center">
+                <button class="btn btn-success" (click)="salvarSegmento()" *ngIf="!editarSegmento" title="Criar segmento">
+                    <i class="material-icons">save</i>
+                </button>
+                <button class="btn btn-success" (click)="atualizarSegmento()" *ngIf="editarSegmento" title="Salvar edição">
+                    <i class="material-icons">save</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

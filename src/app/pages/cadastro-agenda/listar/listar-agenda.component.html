@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="pull-left">
+                    <h2>Agenda de eventos</h2>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-info" title="Visualizar em lista" *ngIf="showBoard" (click)="mudarVisualizacao()">
+                        <i class="material-icons">list_alt</i>
+                    </button>
+                    <button class="btn btn-info" title="Visualizar em quadros" *ngIf="showLista" (click)="mudarVisualizacao()">
+                        <i class="material-icons">dashboard</i>
+                    </button>
+                    <button class="btn btn-primary" [routerLink]="'/add-agenda'" title="Adicionar nova programação">
+                        <i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+            <div class="row" *ngIf="showBoard">
+                <div class="col-md-4 col-xs-12" *ngFor="let a of listaAgenda">
+                    <div class="card">
+                        <div class="row m-0 g-0">
+                            <!-- <div class="col-md-4">
+                                <img src="https://www.casamagalhaes.com.br/blog/wp-content/uploads/2017/10/Happy-Hour-descubra-tudo-que-voc%C3%AA-precisa-saber-e1559071879405.jpg" class="img-fluid rounded-start" alt="...">
+                            </div> -->
+                            <div class="col">
+                                <div class="card-body">
+                                    <h3 class="card-title"><b>{{a.atracao_nome}}</b></h3>
+                                    <h4>{{a.data_hora_inicio}}</h4>
+                                    <h4>{{a.data_hora_fim}}</h4>
+                                    <h4>{{a.local}}</h4>
+                                    <p class="card-text" *ngIf="a.descricao">{{a.descricao}}</p>
+                                </div>
+                                <div class="card-footer pull-right">
+                                    <button type="button" class="btn btn-danger" title="Suspender programação" *ngIf="a.status == true" (click)="alteraStatus(a)">
+                                        <i class="material-icons">power_settings_new</i>
+                                    </button>
+                                    <button type="button" class="btn btn-success" title="Confirmar programação" *ngIf="a.status == false" (click)="alteraStatus(a)">
+                                        <i class="material-icons">power_settings_new</i>
+                                    </button>
+                                    <button type="button" class="btn btn-warning" title="Editar programação" [routerLink]="'/editar-agenda/'+a.agenda_uuid" [queryParams]="{uuid:a.agenda_uuid,atracao_nome:a.atracao_nome,atracao_uuid:a.atracao_uuid,inicio:a.data_hora_inicio,fim:a.data_hora_fim,descricao:a.descricao,local:a.local,status:a.status}">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="showLista">
+                <table class="table table-striped table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Atração</th>
+                            <th>Início</th>
+                            <th>Término</th>
+                            <th>Local</th>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of listaAgenda">
+                            <td>{{a.atracao_nome}}</td>
+                            <td>{{a.data_hora_inicio}}</td>
+                            <td>{{a.data_hora_fim}}</td>
+                            <td>{{a.local}}</td>
+                            <td>{{a.descricao}}</td>
+                            <td>{{a.status == true ? 'Confirmado' : 'Não confirmado'}}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger" title="Suspender programação" *ngIf="a.status == true" (click)="alteraStatus(a)">
+                                    <i class="material-icons">power_settings_new</i>
+                                </button>
+                                <button type="button" class="btn btn-success" title="Confirmar programação" *ngIf="a.status == false" (click)="alteraStatus(a)">
+                                    <i class="material-icons">power_settings_new</i>
+                                </button>
+                                <button type="button" class="btn btn-warning" title="Editar programação" [routerLink]="'/editar-agenda/'+a.agenda_uuid" [queryParams]="{uuid:a.agenda_uuid,atracao_nome:a.atracao_nome,atracao_uuid:a.atracao_uuid,inicio:a.data_hora_inicio,fim:a.data_hora_fim,descricao:a.descricao,local:a.local,status:a.status}">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div *ngIf="!temAgenda">
+                    <h4>Não há agenda cadastrada para exibir</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,30 +1,34 @@
-<div class="row filtro">
+<div class="container-fluid">
     <div class="col">
-        <label for="segmento" class="control-label">Segmento</label>
-        <select class="form-control" [(ngModel)]="segmento" name="segmento" id="segmento" (change)="filtroSegmentos(segmento)">
+        <div class="row filtro">
+            <div class="col">
+                <label for="segmento" class="control-label">Segmento</label>
+                <select class="form-control" [(ngModel)]="segmento" name="segmento" id="segmento" (change)="filtroSegmentos(segmento)">
             <option [ngValue]="s.segmento_uuid" *ngFor="let s of listaSegmentos">{{s.nome}}</option>
         </select>
-    </div>
-    <div class="col">
-        <label for="loja" class="control-label">Loja</label>
-        <select class="form-control" [(ngModel)]="loja" name="loja" id="loja">
-            <option [ngValue]="l.loja_uuid" *ngFor="let l of listaLojas">{{l.nome}}</option>
+            </div>
+            <div class="col">
+                <label for="loja" class="control-label">Loja</label>
+                <select class="form-control" [(ngModel)]="loja" name="loja" id="loja" (change)="filtroLoja(loja)">
+            <option [ngValue]="l.loja_uuid" *ngFor="let l of listaLojas">{{l.loja_nome}}</option>
         </select>
-    </div>
-</div>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col-xs-12 col-md-6" *ngFor="let l of marcasFiltradas">
-        <div class="card">
-            <div class="row m-0 g-0">
-                <div class="col-md-4">
-                    <img src="https://www.casamagalhaes.com.br/blog/wp-content/uploads/2017/10/Happy-Hour-descubra-tudo-que-voc%C3%AA-precisa-saber-e1559071879405.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5>{{l.segmento_nome}}</h5>
-                        <h3 class="card-title">{{l.nome}}</h3>
-                        <h4>{{l.corredor}}{{l.loja}}</h4>
+        <div class="row">
+            <div class="col-xs-12 col-md-6" *ngFor="let l of marcasFiltradas">
+                <div class="card">
+                    <div class="row m-0 g-0">
+                        <div class="col-md-4">
+                            <img src="https://www.casamagalhaes.com.br/blog/wp-content/uploads/2017/10/Happy-Hour-descubra-tudo-que-voc%C3%AA-precisa-saber-e1559071879405.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>{{l.segmento_nome}}</h5>
+                                <h3 class="card-title">{{l.nome}}</h3>
+                                <h4>{{l.corredor}}{{l.loja}}</h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

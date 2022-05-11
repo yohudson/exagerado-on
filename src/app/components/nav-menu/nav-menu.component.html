@@ -5,8 +5,20 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="closeMenu()"></button>
     </div>
     <div class="offcanvas-body">
-        <ul>
+        <!-- menu administrativo -->
+        <ul *ngIf="global.usuario.perfil_id == 1">
+            <li><a class="dropdown-item" [routerLink]="'/dashboard'" (click)="navigate()">Home</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/listar-segmentos'" (click)="navigate()">Segmentos</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/listar-marcas'" (click)="navigate()">Marcas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/listar-lojas'" (click)="navigate()">Lojas</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/listar-atracoes'" (click)="navigate()">Atrações</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/listar-agenda'" (click)="navigate()">Agenda</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/login'" (click)="logout()">Sair</a></li>
+        </ul>
+        <!-- menu usuário frequentador -->
+        <ul *ngIf="global.usuario.perfil_id == 2">
             <li><a class="dropdown-item" [routerLink]="'/'" (click)="navigate()">Home</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/perfil'" (click)="navigate()">Perfil</a></li>
             <!-- <li><a class="dropdown-item" [routerLink]="'/mapa'" (click)="navigate()">Mapa do evento</a></li> -->
             <li><a class="dropdown-item" [routerLink]="'/lojas'" (click)="navigate()">Catálogo de lojas</a></li>
             <li><a class="dropdown-item" [routerLink]="'/marcas'" (click)="navigate()">Catálogo de marcas</a></li>

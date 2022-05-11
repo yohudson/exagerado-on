@@ -1,0 +1,17 @@
+.colspan {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    text-align: center;
+    display: revert !important;
+}
+
+h4 {
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.table td:last-of-type {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    display: flex;
+}

@@ -1,0 +1,28 @@
+.indicador {
+    font-size: 3.5rem;
+    line-height: 3.75rem;
+}
+
+.pull-right {
+    flex: 0;
+}
+
+.pull-left {
+    align-items: baseline;
+}
+
+.card-body {
+    padding: 0.25rem 0.5rem;
+}
+
+.card-body .row {
+    margin: 0.5rem auto;
+}
+
+.card:first-of-type {
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-weight: bold;
+}
