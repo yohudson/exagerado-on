@@ -47,12 +47,10 @@ export class CadastroAgendaComponent implements OnInit {
   obterDadosAgenda = () => {
     return new Promise((resolve) => {
           this.agenda_uuid = this.route.snapshot.paramMap.get("uuid") || '';
-          console.log(this.agenda_uuid)
           this.route.queryParams.subscribe(
             params => {
               if(Object.keys(params).length > 0){
                 this.editarAgenda = true;
-                console.log(params)
                 this.agenda.uuid = params['uuid'];
                 this.agenda.atracao_nome = params['atracao_nome'];
                 this.agenda.atracao_uuid = params['atracao_uuid'];
@@ -60,9 +58,6 @@ export class CadastroAgendaComponent implements OnInit {
                 var data_hora_fim = params['fim'];
                 this.agenda.local = params['local'];
                 this.agenda.descricao = params['descricao'];
-                
-                console.log(data_hora_inicio)
-                console.log(data_hora_fim)
 
                 var data = data_hora_inicio.split(' ')[0]
                 var hora_inicio = data_hora_inicio.split(' ')[1]
@@ -106,7 +101,6 @@ export class CadastroAgendaComponent implements OnInit {
     Object.assign(obj, this.agenda);
     this.validaCampos().then(
       result => {
-        console.log(obj)
         this.service.Post(`agenda`, obj).subscribe(
           result => {
             Swal.close();
@@ -134,7 +128,6 @@ export class CadastroAgendaComponent implements OnInit {
   atualizarAgenda = () => {
     var obj:any = {};
     Object.assign(obj, this.agenda);
-    console.log(this.agenda)
     this.service.Put(`agenda/${obj.uuid}`, obj).subscribe(
       result => {
         Swal.close();

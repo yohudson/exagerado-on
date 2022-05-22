@@ -30,7 +30,6 @@ export class ListarMarcaComponent implements OnInit {
     Swal.showLoading();
     this.service.Get(`brands`).subscribe(
       result => {
-        console.log(result)
         this.listaMarcas = result;
         Swal.close()
       }
@@ -40,7 +39,6 @@ export class ListarMarcaComponent implements OnInit {
   alterarStatusMarcas = (marca:any) => {
     marca.status = !marca.status;
     Swal.showLoading();
-    console.log(marca)
     this.service.Put(`brand/${marca.marca_uuid}`, marca).subscribe(
       result => {
         Swal.close();

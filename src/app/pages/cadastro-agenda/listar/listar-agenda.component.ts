@@ -59,7 +59,6 @@ export class ListarAgendaComponent implements OnInit {
     return new Promise((resolve, reject) => {
       if (Object.keys(this.listaAgenda).length > 0){
         for (let item of this.listaAgenda){
-          console.log(item)
           if(item.data_hora_inicio){
             var data = item.data_hora_inicio.split('T')[0]
             data = data.split('-')[2]+'/'+data.split('-')[1]+'/'+data.split('-')[0]
@@ -87,18 +86,15 @@ export class ListarAgendaComponent implements OnInit {
   }
 
   alteraStatus = (agenda:any) => {
-    console.log(agenda)
     Swal.showLoading();
     var obj: any = {};
     Object.assign(obj, agenda)
     obj.status = !obj.status;
     obj.uuid = agenda.agenda_uuid;
-    console.log(obj)
     this.padraoServidor(obj).then(
       result => {
         var refresh:any = {};
         refresh = result;
-        console.log(refresh)
         this.service.Put(`agenda/${refresh['agenda_uuid']}`, refresh).subscribe(
           result => {
             Swal.close();

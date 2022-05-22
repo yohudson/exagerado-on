@@ -57,6 +57,10 @@ export class DashboardComponent implements OnInit{
   public graficoGenero!: Partial<DonutChart>;
   @ViewChild("favoritos") favoritos!: ChartComponent;
   public graficoMarcasFavoritas!: Partial<DonutChart>;
+  @ViewChild("conheceEvento") conheceEvento!: ChartComponent;
+  public graficoConheceEvento!: Partial<DonutChart>;
+  @ViewChild("soubeEvento") soubeEvento!: ChartComponent;
+  public graficoSoubeEvento!: Partial<DonutChart>;
 
   //lojas e segmentos
   numeroLojas: any = '';
@@ -79,6 +83,9 @@ export class DashboardComponent implements OnInit{
   listaFavoritas: any = []
   legendaFavoritas: any = []
   totalFavoritas:any = []
+  //Conhece evento
+
+  //Soube do evento
   
   constructor(
     private service: ApiService,
@@ -113,7 +120,6 @@ export class DashboardComponent implements OnInit{
             this.numeroLojasSegmento = [...map.values()]
             this.obterUsuarios().then(
               result => {
-                //console.log(result)
                 this.listaUsuarios = result;
                 var index:any = 0;
                 this.faixaEtaria[0] = 0;
@@ -128,19 +134,12 @@ export class DashboardComponent implements OnInit{
                 for(let usuario of this.listaUsuarios){
                   if (usuario.perfil_id == 2){
                     index += 1;
-                    //console.log(usuario)
                     if (usuario.data_nascimento) {
                       var data = usuario.data_nascimento.split("T")[0];
                       var today = new Date();
                       var hoje = today.toISOString()
                       hoje = hoje.split("T")[0]
-                      //console.log(data)
-                      // console.log(hoje)
                       var anos = parseInt(hoje.split("-")[0]) - data.split("-")[0]
-                      // var meses = parseInt(hoje.split("-")[1]) - data.split("-")[1]
-                      // if (meses < 0){
-                      //   meses = 12 + meses
-                      // }
                       if (anos < 18){
                         this.faixaEtaria[0] += 1
                       }
@@ -175,7 +174,6 @@ export class DashboardComponent implements OnInit{
 
                 this.valoresEtarios = [...map.values()]
 
-                console.log(this.faixaEtaria)
                 this.listaFaixas.push('menor de 18')
                 this.listaFaixas.push('de 18 a 24')
                 this.listaFaixas.push('de 25 a 29')
@@ -185,14 +183,10 @@ export class DashboardComponent implements OnInit{
                 this.listaFaixas.push('de 60 a 64')
                 this.listaFaixas.push('acima de 65')
                 this.listaFaixas.push('não informado')
-                console.log(this.listaFaixas)
-
-                console.log(this.faixaEtaria)
 
                 this.totalUsuarios = index;
                 this.obterGeneros().then(
                   result => {
-                    //console.log(result)
                     this.listaGeneros = result
                     for (let genero of this.listaGeneros){
                       for (let usuario of this.listaUsuarios){
@@ -426,9 +420,7 @@ export class DashboardComponent implements OnInit{
           }
           const map = favoritos.reduce((acc:any, e:any) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
           this.totalFavoritas = [...map.values()]
-          //console.log(this.totalFavoritas)
           this.legendaFavoritas = [...map.keys()]
-          //console.log(this.legendaFavoritas)
 
           resolve('ok')
         },

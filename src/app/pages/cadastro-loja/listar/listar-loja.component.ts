@@ -32,7 +32,6 @@ export class ListarLojaComponent implements OnInit {
     Swal.showLoading();
     this.service.Get(`stores`).subscribe(
       result => {
-        console.log(result)
         this.listaLojas = result;
         Swal.close()
         this.temLojas = true;

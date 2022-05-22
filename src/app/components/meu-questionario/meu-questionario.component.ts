@@ -159,7 +159,6 @@ export class MeuQuestionarioComponent implements OnChanges {
     if(this.global.usuario) {
       this.questionario.user_uuid = this.global.usuario.user_uuid;
     }
-    console.log(this.questionario)
     Swal.close();
     this.enviarQuestionario().then(
       result => {

@@ -19,7 +19,6 @@ export class AppComponent {
   ngOnInit() {
     var log = localStorage.getItem('login')
     if (!log){
-      console.log('none')
       this.global.nav = false;
       this.router.navigate(['/login']);
     }

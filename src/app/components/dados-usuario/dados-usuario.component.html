@@ -33,11 +33,6 @@
         <div class="row button-row">
             <button class="btn btn-secondary" [routerLink]="'/login'"><span class="material-icons">login</span>&ensp;Ir para login</button>
             <button class="btn btn-success" (click)="proximoPasso(2)"><span class="material-icons">save</span>&ensp;Salvar</button>
-            <button type="button" class="btn btn-google" (click)="authService.GoogleAuth()">
-                <img src="../../../assets/img/btn-google.svg"/>
-                <span>&ensp;Entrar com Google</span>
-            </button>
-            <!-- <button class="btn btn-primary" (click)="irQuestionario(2)">Próxima página</button> -->
         </div>
     </form>
 </div>

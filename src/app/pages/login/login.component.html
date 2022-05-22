@@ -10,13 +10,13 @@
             </div>
             <div class="row">
                 <label class="control-label">Senha</label>
-                <input type="password" class="form-control" [(ngModel)]="login.senha" name="senha">
+                <input type="password" class="form-control" [(ngModel)]="login.no_hash" name="senha">
             </div>
             <div class="row">
                 <button class="btn btn-success" (click)="realizarLogin()"><span class="material-icons">login</span>&ensp;Entrar</button>
             </div>
             <div class="row">
-                <button type="button" class="btn btn-google" (click)="authService.GoogleAuth()">
+                <button type="button" class="btn btn-google" (click)="cadGoogle()">
                     <img src="../../../assets/img/btn-google.svg"/>
                     <span>&ensp;Entrar com Google</span>
                 </button>

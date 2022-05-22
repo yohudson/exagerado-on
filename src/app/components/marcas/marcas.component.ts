@@ -30,7 +30,6 @@ export class MarcasComponent implements OnInit {
   obterListaMarcas = () => {
     this.service.Get(`brands`).subscribe(
       result => {
-        console.log(result)
         this.listaMarcas = result
       }
     )
@@ -115,7 +114,6 @@ export class MarcasComponent implements OnInit {
       for (let item of this.marcasFavoritas){
         this.buscaMarca(item).then(
           result => {
-            console.log(result)
             lista_marcas.push(result);
           },
           error => {

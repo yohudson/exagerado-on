@@ -30,7 +30,6 @@ export class ListarSegmentoComponent implements OnInit {
     Swal.showLoading();
     this.service.Get(`segments`).subscribe(
       result => {
-        console.log(result)
         this.listaSegmentos = result;
         Swal.close()
       }
@@ -40,7 +39,6 @@ export class ListarSegmentoComponent implements OnInit {
   alterarStatusSegmento = (segmento:any) => {
     segmento.status = !segmento.status;
     Swal.showLoading();
-    console.log(segmento)
     this.service.Put(`segment/${segmento.segmento_uuid}`, segmento).subscribe(
       result => {
         Swal.close();

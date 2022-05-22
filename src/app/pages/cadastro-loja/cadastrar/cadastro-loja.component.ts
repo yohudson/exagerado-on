@@ -56,7 +56,6 @@ export class CadastroLojaComponent implements OnInit {
         params => {
           if(Object.keys(params).length > 0){
             this.editarLoja = true;
-            console.log(params)
             this.loja.cnpj = params['cnpj'];
             this.loja.nome_loja = params['nome'];
             this.loja.nome_responsavel = params['responsavel'];
@@ -138,7 +137,6 @@ export class CadastroLojaComponent implements OnInit {
     }
     this.loja.marcas_vendidas = lista_marcas
     this.loja.segmentos = lista_segmentos
-    console.log(this.loja)
     var obj = {};
     Object.assign(obj, this.loja);
     // this.validaCampos().then(
@@ -161,7 +159,6 @@ export class CadastroLojaComponent implements OnInit {
   manterLoja = (obj:any) => {
     return new Promise((resolve, reject) => {
       if(obj.loja_uuid){
-        console.log('vamos atualizar')
         //resolve('ok')
         this.service.Put(`store/${obj.loja_uuid}`, obj).subscribe(
           result => {
@@ -186,7 +183,6 @@ export class CadastroLojaComponent implements OnInit {
   }
 
   atualizarLoja = () => {
-    console.log('atualizar')
     var lista_marcas = []
     var lista_segmentos = []
     for (let item of this.marcaDetalhada){
@@ -197,7 +193,6 @@ export class CadastroLojaComponent implements OnInit {
     }
     this.loja.marcas_vendidas = lista_marcas
     this.loja.segmentos = lista_segmentos
-    console.log(this.loja)
     var obj = {};
     Object.assign(obj, this.loja);
     this.manterLoja(obj).then(

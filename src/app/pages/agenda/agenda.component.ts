@@ -67,7 +67,6 @@ export class AgendaComponent implements OnInit {
         dia = dia.split("-")[2]+'/'+dia.split("-")[1]+'/'+dia.split("-")[0]
         dias.push(dia)
       }
-      //console.log(dias)
       this.diasAgenda = [... new Set(dias)]
       this.diasAgenda.sort()
       if (this.diasAgenda.length == 0) {

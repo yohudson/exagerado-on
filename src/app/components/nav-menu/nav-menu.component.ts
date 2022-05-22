@@ -26,7 +26,6 @@ export class NavMenuComponent implements OnInit {
     this.global.nav = false;
     this.global.displayMenu = false;
     this.router.navigate(['/login']);
-    console.log(this.global)
   }
 
   navigate = () => {

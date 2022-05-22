@@ -4,6 +4,7 @@ import { Global } from '../../global';
 import Swal from 'sweetalert2';
 
 import { AuthService } from "../../shared/services/auth.service";
+import * as crypto from 'crypto-js';
 
 @Component({
   selector: 'app-dados-usuario',
@@ -15,6 +16,14 @@ export class DadosUsuarioComponent implements OnInit {
   usuario: any = {}
   listaGeneros: any = [];
   loading: boolean = false;
+
+  //converte senha
+  tokenFromUI: string = "0123456789123456";
+  encrypted: any = "";
+  decrypted: string = "";
+
+  request: string = "";
+  responce: string = "";
 
   @Output() passo = new EventEmitter<number>();
   constructor(
@@ -32,55 +41,61 @@ export class DadosUsuarioComponent implements OnInit {
     this.validaCadastro().then(
       result => {
         Swal.close();
-        //this.converteSenha(this.usuario).then(
-        //  result => {
-        const obj:any = {};
-        Object.assign(obj, this.usuario);
-        this.comparaSenha(this.usuario.senha, this.usuario.confirma_senha).then(
-          result =>{
-            if (obj.celular) {
-              obj.celular = obj.celular.replace(/\D/g,'')
-            }
-            delete obj.confirmar_senha
-            this.salvarDados(obj).then(
-              result => {
-                this.loading = false;
-                this.global.usuario = result;
-                Swal.fire('Sucesso', 'Dados cadastrados com sucesso!', 'success').then(
+        this.converteSenha().then(
+          result => {
+            var senhas: any = {};
+            senhas = result
+            const obj:any = {};
+            Object.assign(obj, this.usuario);
+            
+            Object.keys(obj).forEach(a => {
+              Object.keys(senhas).forEach(b => {
+                if (a === b) {
+                  obj[a] = senhas[b]
+                }
+              })
+            });
+            this.comparaSenha(obj.senha, obj.confirma_senha).then(
+              result =>{
+                if (obj.celular) {
+                  obj.celular = obj.celular.replace(/\D/g,'')
+                }
+                delete obj.confirma_senha
+                this.salvarDados(obj).then(
                   result => {
-                    if (result['value']==true){
-                      this.passo.emit(value)
-                    }
+                    this.loading = false;
+                    this.global.usuario = result;
+                    Swal.fire('Sucesso', 'Dados cadastrados com sucesso!', 'success').then(
+                      result => {
+                        if (result['value']==true){
+                          this.passo.emit(value)
+                        }
+                      },
+                      error => {
+                        Swal.close();        
+                        Swal.fire('Atenção', error.toString(), 'warning')
+                      }
+                    )
                   },
                   error => {
-                    Swal.close();        
-                    Swal.fire('Atenção', error.toString(), 'warning')
+                    this.loading = false;
+                    Swal.fire('Erro', error.toString(), 'error')
                   }
                 )
               },
               error => {
-                console.log(error)
                 this.loading = false;
-                Swal.fire('Erro', error.toString(), 'error')
+                Swal.fire('Atenção', error.toString(), 'warning')
               }
             )
           },
           error => {
-            console.log(error)
-            this.loading = false;
+            Swal.hideLoading()
             Swal.fire('Atenção', error.toString(), 'warning')
           }
-        //)
-        //  },
-        //  error => {
-        //     console.log(error)
-        //  Swal.hideLoading()
-        //   Swal.fire('Atenção', error.toString(), 'warning')
-        //}
         )
       },
       error => {
-        console.log(error)
         Swal.fire('Atenção', error.toString(), 'warning')
       }
     )
@@ -101,10 +116,10 @@ export class DadosUsuarioComponent implements OnInit {
         reject('É preciso informar o nome completo')
         return
       }
-      if (!this.usuario['celular']) {
-        reject('É preciso informar o seu número de celular')
-        return
-      }
+      // if (!this.usuario['celular']) {
+      //   reject('É preciso informar o seu número de celular')
+      //   return
+      // }
       if (!this.usuario['email']) {
         reject('É preciso informar seu e-mail')
         return
@@ -139,13 +154,36 @@ export class DadosUsuarioComponent implements OnInit {
   }
 
   converteSenha = () => {
-    var listaSenhas: any = {}
-    Object.assign(listaSenhas.senha, this.usuario.senha)
-    Object.assign(listaSenhas.confirma, this.usuario.confirma_senha)
     return new Promise((resolve, reject) => {
+      var dadosConverter: any = {}
+      Object.assign(dadosConverter, this.usuario)
+      var listaSenhas: any = []
+      listaSenhas.senha = dadosConverter.senha;
+      listaSenhas.confirma_senha = dadosConverter.confirma_senha;
       //converter a senha para hash
-      var converte;
-      if (converte){
+      var converte: number = 0;
+      var senhasConvertidas: any = []
+      for (var i = 0; i < Object.keys(listaSenhas).length;i++){
+        var x: any = Object.values(listaSenhas)[i];
+        var y: any = Object.keys(listaSenhas)[i];
+        let _key = crypto.enc.Utf8.parse(x);
+        let _iv = crypto.enc.Utf8.parse(x);
+        let crypt = crypto.AES.encrypt(
+        JSON.stringify(this.request), _key, {
+          keySize: 16,
+          iv: _iv,
+          mode: crypto.mode.ECB,
+          padding: crypto.pad.Pkcs7
+        });
+        var encrypted:any = crypt.toString();        
+        Object.keys(listaSenhas).forEach(key => {
+          if (key === y) {
+            listaSenhas[key] = encrypted
+          }
+        });        
+        converte++;
+      }
+      if (converte === Object.keys(listaSenhas).length){
         resolve(listaSenhas)
       }
       else {

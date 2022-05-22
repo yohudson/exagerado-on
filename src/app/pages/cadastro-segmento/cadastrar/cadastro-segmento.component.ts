@@ -78,9 +78,7 @@ export class CadastroSegmentoComponent implements OnInit {
 
   atualizarSegmento = () => {
     Swal.showLoading();
-    console.log(this.segmento)
     var obj = this.segmento;
-    console.log(obj)
     this.service.Put(`segment/${this.segmento_uuid}`, obj).subscribe(
       result => {
         Swal.close();

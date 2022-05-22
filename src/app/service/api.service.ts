@@ -58,7 +58,6 @@ export class ApiService {
       errorMessage = `${error.status}: ${error.message}`;
       Swal.close()
     }
-    console.log(errorMessage);
     Swal.close()
     return throwError(errorMessage);
   };

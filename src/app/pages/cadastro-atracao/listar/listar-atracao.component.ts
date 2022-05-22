@@ -32,7 +32,6 @@ export class ListarAtracaoComponent implements OnInit {
     Swal.showLoading();
     this.service.Get(`attractions`).subscribe(
       result => {
-        console.log(result)
         this.listaAtracoes = result;
         Swal.close()
         this.temAtracao = true;
@@ -43,7 +42,6 @@ export class ListarAtracaoComponent implements OnInit {
   alterarStatusAtracao = (atracao:any) => {
     Swal.showLoading
     atracao.status = !atracao.status;
-    console.log(atracao)
     this.service.Put(`attraction/${atracao.atracao_uuid}`, atracao).subscribe(
       result => {
         Swal.close();

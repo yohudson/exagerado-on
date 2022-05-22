@@ -44,12 +44,10 @@ export class CadastroMarcaComponent implements OnInit {
 
   obterDadosMarca = () => {
     this.marca.marca_uuid = this.route.snapshot.paramMap.get("uuid") || ''
-    console.log(Object.keys(this.marca.marca_uuid).length)
     if (Object.keys(this.marca.marca_uuid).length > 0){
       this.editarMarca = true;
       this.route.queryParams.subscribe(
         params => {
-          console.log(params)
           if(Object.keys(params).length > 0){
             if(params['status'] ==="false"){
               this.marca.status = false;
@@ -57,11 +55,8 @@ export class CadastroMarcaComponent implements OnInit {
             this.marca.nome = params['nome'];
             if (params['lista_segmentos']){
               for (let item of params['lista_segmentos']){
-                console.log(item)
-                console.log(this.listaSegmentos)
                 for (let segmento of this.listaSegmentos){
                   if(item === segmento.segmento_uuid){
-                    console.log(segmento)
                     this.segmentoSelecionado.push(segmento.nome)
                     this.segmentoDetalhado.push(segmento)
                   }
@@ -135,7 +130,6 @@ export class CadastroMarcaComponent implements OnInit {
     var obj = this.marca;
     obj.lista_segmentos = [];
     for (let segmento of this.segmentoDetalhado){
-      console.log(segmento)
       obj.lista_segmentos.push(segmento.segmento_uuid);
     }
     obj.segmento = this.segmentoDetalhado[0].segmento_uuid

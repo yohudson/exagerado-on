@@ -11,9 +11,7 @@ export class Global {
   aplicarMascara = (value: any) => {
     return new Promise((resolve, reject) => {
       //for (let objeto of Object.values(value)){
-        //console.log(objeto)
         for (let item of Object.entries(value)){
-          //console.log(item[0])
           if (item.includes('cep')) {
             var text: any = '';
             text = item[1]
