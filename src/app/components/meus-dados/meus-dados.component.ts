@@ -41,7 +41,7 @@ export class MeusDadosComponent implements OnChanges {
       if (this.usuario.telefone == "0") {
         delete this.usuario.telefone
       }
-      if (this.usuario.data_nascimento != "0001-01-01") {
+      if (this.usuario.cad_google) {
         this.cadGoogle = true;
       }
       if (this.usuario.data_nascimento == "0001-01-01") {

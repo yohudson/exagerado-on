@@ -56,11 +56,9 @@ export class DashboardComponent implements OnInit{
   @ViewChild("genero") genero!: ChartComponent;
   public graficoGenero!: Partial<DonutChart>;
   @ViewChild("favoritos") favoritos!: ChartComponent;
-  public graficoMarcasFavoritas!: Partial<DonutChart>;
+  public graficoMarcasFavoritas!: Partial<DonutChart>;  
   @ViewChild("conheceEvento") conheceEvento!: ChartComponent;
   public graficoConheceEvento!: Partial<DonutChart>;
-  @ViewChild("soubeEvento") soubeEvento!: ChartComponent;
-  public graficoSoubeEvento!: Partial<DonutChart>;
 
   //lojas e segmentos
   numeroLojas: any = '';
@@ -84,8 +82,9 @@ export class DashboardComponent implements OnInit{
   legendaFavoritas: any = []
   totalFavoritas:any = []
   //Conhece evento
-
-  //Soube do evento
+  usuariosConhecemEvento: any = []
+  respostasQuiz: any = []
+  
   
   constructor(
     private service: ApiService,
@@ -205,8 +204,29 @@ export class DashboardComponent implements OnInit{
                         this.marcasCadastradas = result;
                         this.obterMarcasFavoritas().then(
                           result => {
-                            this.gerarGraficos();
-                            Swal.close()
+                            this.obterQuiz().then(
+                              result =>{
+                                console.log(result)
+
+                                var quiz: any = result;
+                                for (let q of quiz){
+                                  if (q){
+                                    this.respostasQuiz.push('Sim');
+                                  }
+                                  else{
+                                    this.respostasQuiz.push('Não');
+                                  }
+                                }
+                                const map = this.respostasQuiz.reduce((acc:any, e:any) => acc.set(e, (acc.get(e) || 0) + 1), new Map());            
+                                this.usuariosConhecemEvento = [...map.values()]
+
+                                this.gerarGraficos();
+                                Swal.close()
+                              },
+                              error => {
+                                this.emiteErro(error)
+                              }
+                            )
                           },
                           error => {
                             this.emiteErro(error)
@@ -398,6 +418,32 @@ export class DashboardComponent implements OnInit{
         }
       ]
     };
+    
+    this.graficoConheceEvento = {
+      series: this.usuariosConhecemEvento,
+      chart: {
+        type: "donut"
+      },
+      dataLabels: {
+        enabled: false
+      },
+      fill: {
+        type: "gradient"
+      },
+      labels:  this.respostasQuiz,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
   }
 
   obterMarcasFavoritas = () => {
@@ -433,6 +479,18 @@ export class DashboardComponent implements OnInit{
   obterMarcas = () => {
     return new Promise((resolve, reject) => {
       this.service.Get(`brands`).subscribe(
+        result => {
+          resolve(result)
+        },
+        error => {
+          reject(error)
+        }
+      )
+    })
+  }
+  obterQuiz = () => {
+    return new Promise((resolve, reject) => {
+      this.service.Get(`all-quiz`).subscribe(
         result => {
           resolve(result)
         },

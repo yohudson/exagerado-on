@@ -32,6 +32,15 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-9">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <apx-chart [series]="faixaEtariaFrequentadores.series" [chart]="faixaEtariaFrequentadores.chart" [xaxis]="faixaEtariaFrequentadores.xaxis" [title]="faixaEtariaFrequentadores.title"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="card card-default">
                     <div class="card-body">
@@ -62,9 +71,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <apx-chart [series]="faixaEtariaFrequentadores.series" [chart]="faixaEtariaFrequentadores.chart" [xaxis]="faixaEtariaFrequentadores.xaxis" [title]="faixaEtariaFrequentadores.title"></apx-chart>
+            <div class="col-md-3">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3>Usuários já conheciam o evento?</h3>
+                            <apx-chart [series]="graficoConheceEvento.series" [chart]="graficoConheceEvento.chart" [labels]="graficoConheceEvento.labels" [fill]="graficoConheceEvento.fill" [dataLabels]="graficoConheceEvento.dataLabels" [responsive]="graficoConheceEvento.responsive"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

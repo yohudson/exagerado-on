@@ -138,6 +138,7 @@ export class AuthService {
       .signInWithPopup(new auth.GoogleAuthProvider())
       .then((result) => {
         this.ngZone.run(() => {
+          console.log(localStorage)
           resolve(result)
         });
         //this.SetUserData(result.user)

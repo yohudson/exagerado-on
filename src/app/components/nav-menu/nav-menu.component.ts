@@ -23,6 +23,8 @@ export class NavMenuComponent implements OnInit {
 
   logout = () => {
     localStorage.removeItem('login');
+    localStorage.removeItem('user');
+    console.log(localStorage)
     this.global.nav = false;
     this.global.displayMenu = false;
     this.router.navigate(['/login']);
