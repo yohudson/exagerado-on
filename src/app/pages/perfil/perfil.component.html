@@ -1,12 +1,24 @@
 <div class="container-fluid">
     <div class="col">
         <div class="row">
+            <ul class="nav nav-pills nav-fill" *ngIf="mobile">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" data-bs-target="#dados_usuario" [ngClass]="{'active' : abaAtiva === 1}" (click)="mudaAba(1)">Dados do usuário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-target="#questionario_usuario" [ngClass]="{'active' : abaAtiva === 2}" (click)="mudaAba(2)">Questionário</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-target="#marcas_favoritas_usuario" [ngClass]="{'active' : abaAtiva === 3}" (click)="mudaAba(3)">Marcas favoritas</a>
+                </li>
+            </ul>
             <div class="d-flex align-items-start">
-                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical" *ngIf="!mobile">
                     <button class="nav-link" id="dados_usuario-tab" data-bs-toggle="pill" data-bs-target="#dados_usuario" type="button" role="tab" aria-controls="dados_usuario" [ngClass]="{'active' : abaAtiva === 1}" (click)="mudaAba(1)">Dados do usuário</button>
                     <button class="nav-link" id="questionario_usuario-tab" data-bs-toggle="pill" data-bs-target="#questionario_usuario" type="button" role="tab" aria-controls="questionario_usuario" [ngClass]="{'active' : abaAtiva === 2}" (click)="mudaAba(2)">Questionário</button>
                     <button class="nav-link" id="marcas_favoritas_usuario-tab" data-bs-toggle="pill" data-bs-target="#marcas_favoritas_usuario" type="button" role="tab" aria-controls="marcas_favoritas_usuario" [ngClass]="{'active' : abaAtiva === 3}" (click)="mudaAba(3)">Marcas favoritas</button>
                 </div>
+
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade" id="dados_usuario" role="tabpanel" aria-labelledby="dados_usuario-tab" [ngClass]="{'show active' : abaAtiva === 1}">
                         <app-meus-dados [meusDados]="dadosUsuario"></app-meus-dados>

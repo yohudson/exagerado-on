@@ -7,6 +7,8 @@ import { Router } from "@angular/router";
 import * as $ from 'jquery';
 import { AuthService } from "../../shared/services/auth.service";
 
+import * as crypto from 'crypto-js';
+
 @Component({
   selector: 'app-meus-dados',
   templateUrl: './meus-dados.component.html',
@@ -19,7 +21,15 @@ export class MeusDadosComponent implements OnChanges {
   loading: boolean = false;
   cadGoogle: boolean = false;
 
+  tokenFromUI: string = "0123456789123456";
+  encrypted: any = "";
+  decrypted: string = "";
+
+  request: string = "";
+  responce: string = "";
+
   @Input() meusDados: any;
+
 
   constructor(
     private service: ApiService,
@@ -33,15 +43,13 @@ export class MeusDadosComponent implements OnChanges {
       this.usuario.celular = this.meusDados.telefone
       var data_nascimento = this.usuario.data_nascimento.split("T")[0]
       this.usuario.data_nascimento = data_nascimento
-      //delete this.usuario.senha
-      console.log(this.usuario)
       if (this.usuario.celular == "0") {
         delete this.usuario.celular
       }
       if (this.usuario.telefone == "0") {
         delete this.usuario.telefone
       }
-      if (this.usuario.cad_google) {
+      if (this.usuario.cad_google == true) {
         this.cadGoogle = true;
       }
       if (this.usuario.data_nascimento == "0001-01-01") {
@@ -69,31 +77,130 @@ export class MeusDadosComponent implements OnChanges {
 
   atualizarDados = () => {
     Swal.showLoading();
-    console.log(this.usuario)
+    var senha: any = [];
+    if (this.usuario.nohash == '' || this.usuario.nohash == null && this.usuario.confirma_senha == '' || this.usuario.confirma_senha == null){
+      var user = JSON.parse(localStorage.getItem('login') || '');
+      this.usuario.senha = user.senha
+      var obj:any = {}
+      Object.assign(obj, this.usuario)
+      if (obj.telefone) {
+        obj.telefone = obj.telefone.replace(/\D/g,'')
+      }
+      this.service.Put(`users/${obj.user_uuid}`, obj).subscribe(
+        result => {
+          Swal.close();
+          Swal.fire('Sucesso!', 'Dados atualizados com sucesso', 'success').then(
+            result => {
+              this.obterUsuario(obj.user_uuid)
+            }
+          );
+        },
+        error => {
+            Swal.close();
+            Swal.fire('Erro!', error.toString(), 'error');
+        }
+      )
+      return
+    }
 
-    this.service.Put(`users/${this.usuario.user_uuid}`, this.usuario).subscribe(
+    else {
+      senha.senha1 = this.usuario.nohash
+      senha.senha2 = this.usuario.confirma_senha
+    }
+    this.gerarHash(this.usuario.nohash).then(
       result => {
-        Swal.close();
-        Swal.fire('Sucesso!', 'Dados atualizados com sucesso', 'success').then(
+        this.usuario.senha = result;
+        this.gerarHash(this.usuario.confirma_senha).then(
           result => {
-            this.obterUsuario(this.usuario.user_uuid)
+            this.usuario.confirma_hash = result;
+            this.comparaSenha(this.usuario.senha, this.usuario.confirma_hash).then(
+              result => {
+                delete this.usuario.confirma_senha;
+                delete this.usuario.nohash;
+                var obj:any = {}
+                Object.assign(obj, this.usuario)
+                if (obj.telefone) {
+                  obj.telefone = obj.telefone.replace(/\D/g,'')
+                }
+                this.service.Put(`users/${obj.user_uuid}`, obj).subscribe(
+                  result => {
+                    Swal.close();
+                    Swal.fire('Sucesso!', 'Dados atualizados com sucesso', 'success').then(
+                      result => {
+                        this.obterUsuario(obj.user_uuid)
+                      }
+                    );
+                  },
+                  error => {
+                      Swal.close();
+                      Swal.fire('Erro!', error.toString(), 'error');
+                    }
+                )
+              },
+              error => {
+                Swal.close();
+                if (error.mensagem) Swal.fire('Erro', error.mensagem, 'error');
+                if (error) Swal.fire('Erro', error, 'error');
+              }
+            )
+          },
+          error => {
+            Swal.close();
+            if (error.mensagem) Swal.fire('Erro', error.mensagem, 'error');
+            if (error) Swal.fire('Erro', 'Falha ao comparar a confirmação de senha', 'error');
           }
-        );
-        // Swal.fire('Sucesso!', result.toString(), 'success');
+        )
       },
       error => {
         Swal.close();
-        Swal.fire('Erro!', error.toString(), 'error');
-      }
+        if (error.mensagem) Swal.fire('Erro', error.mensagem, 'error');
+        if (error) Swal.fire('Erro', 'Falha ao comparar a senha', 'error');
+      } 
     )
   }
 
   obterUsuario = (usuario:any) => {
     this.service.Get(`users/${usuario}`).subscribe(
       result => {
-        this.usuario = result;
+        var usuario = result;
+        usuario.data_nascimento = usuario.data_nascimento.split("T")[0]
+        this.global.aplicarMascara(usuario).then(
+          result => {
+            usuario.telefone = result
+          }
+        )
+        this.usuario = usuario;
+        this.global.usuario = usuario;
+        localStorage.setItem('login', JSON.stringify(this.usuario))
       }
     )
+  }
+
+  gerarHash = (senha: any) => {
+    return new Promise((resolve, reject) => {
+      let _key = crypto.enc.Utf8.parse(senha);
+      let _iv = crypto.enc.Utf8.parse(senha);
+      let encrypted = crypto.AES.encrypt(
+        JSON.stringify(this.request), _key, {
+          keySize: 16,
+          iv: _iv,
+          mode: crypto.mode.ECB,
+          padding: crypto.pad.Pkcs7
+        });
+      this.encrypted = encrypted.toString();
+      resolve(this.encrypted)
+    })
+  }
+
+  comparaSenha = (senha:any, confirma_senha:any) => {
+    return new Promise((resolve, reject) => {
+      if (senha === confirma_senha){
+        resolve('Senhas iguais')
+      }
+      else {
+        reject('Senhas não são iguais')
+      }
+    })
   }
 
 }

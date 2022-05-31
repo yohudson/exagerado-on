@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ApiService } from '../../service/api.service';
 import { Marca } from '../../models/marca.model';
 import Swal from 'sweetalert2';
@@ -15,8 +15,22 @@ export class PerfilComponent implements OnInit {
   dadosUsuario: any = [];
   questionario: any = [];
   marcasFavoritas: any = [];
+  innerWidth: any;
+  innerHeight: any;
+  mobile: boolean = false;
 
   abaAtiva: any = 1;
+
+  @HostListener('window:resize', ['$event']) onResize(event:any) {
+    this.innerWidth = window.innerWidth;
+    this.innerHeight = window.innerHeight;
+    if (this.innerWidth < this.innerHeight) {
+      this.mobile = true
+    }
+    if (this.innerWidth > this.innerHeight) {
+      this.mobile = false
+    }
+  }
 
   constructor(
     private service: ApiService,

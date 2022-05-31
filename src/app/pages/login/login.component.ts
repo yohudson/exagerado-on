@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
               if(this.global.usuario.perfil_id == 1){
                 this.router.navigate(['/dashboard']);
               }
+              delete this.global.usuario.senha
               localStorage.setItem('login', JSON.stringify(this.global.usuario));
               this.global.nav = true;
             }
@@ -110,6 +111,7 @@ export class LoginComponent implements OnInit {
             cadUsuario.data_nascimento = '0001-01-01';
             cadUsuario.email = user.user.multiFactor.user.email;
             cadUsuario.senha = user.user.multiFactor.user.uid;
+            cadUsuario.cad_google = true;
             this.salvarDadosGooge(cadUsuario).then(
               result => {
                 Swal.close();

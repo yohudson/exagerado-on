@@ -127,20 +127,14 @@ export class ListaMarcasComponent implements OnInit {
       }
       for (let marca of this.marcasFiltradas) {
         marca.lista_segmento_nome = [];
-        console.log(marca)
         for (let marca_segmento of marca.lista_segmento_uuid) {
-          console.log(marca_segmento)
           for (let segmento of this.listaSegmentos) {
-            console.log(segmento.nome)
             if (marca_segmento == segmento.segmento_uuid){
-              console.log(segmento.segmento_uuid)
               marca.lista_segmento_nome.push(segmento.nome)
             }
-            console.log(marca)
           }
         }
       }
-      console.log(this.marcasFiltradas)
       resolve(this.marcasFiltradas)
     })
   }

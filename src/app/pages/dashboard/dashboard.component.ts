@@ -206,8 +206,6 @@ export class DashboardComponent implements OnInit{
                           result => {
                             this.obterQuiz().then(
                               result =>{
-                                console.log(result)
-
                                 var quiz: any = result;
                                 for (let q of quiz){
                                   if (q){

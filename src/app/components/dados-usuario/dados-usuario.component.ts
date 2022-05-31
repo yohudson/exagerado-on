@@ -46,8 +46,8 @@ export class DadosUsuarioComponent implements OnInit {
             var senhas: any = {};
             senhas = result
             const obj:any = {};
-            Object.assign(obj, this.usuario);
-            
+            this.usuario.cad_google = false;
+            Object.assign(obj, this.usuario);            
             Object.keys(obj).forEach(a => {
               Object.keys(senhas).forEach(b => {
                 if (a === b) {

@@ -8,11 +8,11 @@
             <label class="control-label">Seu cel<b class="obrigatorio">*</b></label>
             <input type="tel" class="form-control" [(ngModel)]="usuario.telefone" name="telefone" id="telefone" aplicarMascaras required>
         </div>
-        <div class="row" *ngIf="cadGoogle">
+        <div class="row" *ngIf="!cadGoogle">
             <label class="control-label">Migs, seu e-mail é esse mesmo né?<b class="obrigatorio">*</b></label>
             <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" required>
         </div>
-        <div class="row" *ngIf="!cadGoogle">
+        <div class="row" *ngIf="cadGoogle">
             <label class="control-label">Migs, seu e-mail cadastrado é esse e não podemos trocar, belê?</label>
             <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" disabled>
         </div>
@@ -26,11 +26,11 @@
               <option [ngValue]="g.genero_id" *ngFor="let g of listaGeneros">{{g.nome}}</option>
           </select>
         </div>
-        <div class="row" *ngIf="cadGoogle">
+        <div class="row" *ngIf="!cadGoogle">
             <label class="control-label">Quer trocar de senha?</label>
-            <input type="password" [(ngModel)]="usuario.senha" name="senha" class="form-control">
+            <input type="password" [(ngModel)]="usuario.nohash" name="senha" class="form-control">
         </div>
-        <div class="row" *ngIf="cadGoogle">
+        <div class="row" *ngIf="!cadGoogle">
             <label class="control-label">Se vai trocar, tem que confirmar sua nova senha!</label>
             <input type="password" [(ngModel)]="usuario.confirma_senha" name="confirmar_senha" class="form-control">
         </div>

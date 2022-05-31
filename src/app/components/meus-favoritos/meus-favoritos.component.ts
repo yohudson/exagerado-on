@@ -94,13 +94,7 @@ export class MeusFavoritosComponent implements OnChanges {
         this.manterFavoritos(obj).then(
           result => {
             Swal.close;
-            Swal.fire('Sucesso!', 'Favoritos foram enviados com sucesso!', 'success').then(
-              result => {
-                if (result['value']) {
-                  this.router.navigate(['/login']);
-                }
-              }
-            )
+            Swal.fire('Sucesso!', 'Favoritos foram salvos com sucesso!', 'success')
           },
           error => {
             Swal.close();
